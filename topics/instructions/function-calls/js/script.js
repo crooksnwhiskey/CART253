@@ -1,24 +1,20 @@
 /**
- * Title of Project
- * Author Name
+ * Function calls
+ * Alex Chardon
  * 
- * HOW EMBARRASSING! I HAVE NO DESCRIPTION OF MY PROJECT!
- * PLEASE REMOVE A GRADE FROM MY WORK IF IT'S GRADED!
+ * working on function calls examples.
  */
 
 "use strict";
 
-/**
- * OH LOOK I DIDN'T DESCRIBE SETUP!!
-*/
-function setup() {
 
+function setup() {
+    //once at the beginning of the program
+    createCanvas(640, 480);
 }
 
-
-/**
- * OOPS I DIDN'T DESCRIBE WHAT MY DRAW DOES!
-*/
 function draw() {
-
+    // Every frame
+    background(73, 64, 58);
+    rect(200, 80, 240, 320);
 }
