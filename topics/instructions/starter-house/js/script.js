@@ -22,10 +22,14 @@ function setup() {
  * Draws a house
  */
 function draw() {
-    // The sky
-    background(150, 200, 250);
+    drawSky();
+    drawCloud();
+    drawGround();
+    drawHouse();
+}
 
-    // A cloud
+function drawCloud() {
+    //draws the cloud
     push();
     noStroke();
     // Note: using a single number for a colour will be greyscale
@@ -38,21 +42,41 @@ function draw() {
     ellipse(190, 130, 60, 60);
     ellipse(220, 120, 60, 60);
     pop();
+}
 
-    // The ground
-    push();
-    noStroke();
+function drawGround() {
+    //draws the ground
     fill(200);
     rect(0, 400, 640, 480);
     pop();
+}
 
-    // The main body of the house
+function drawHouse() {
+
+    drawHouseBody();
+    drawHouseRoof();
+    drawHouseWindow();
+    drawHouseDoor();
+    drawhouseDoorknob();
+
+
+
+}
+function drawSky() {
+    // The sky
+    background(150, 200, 250);
+}
+
+function drawHouseBody() {
+    //draws the base of the house
     push();
     noStroke();
     fill(250, 250, 200);
     rect(200, 240, 280, 180);
     pop();
+}
 
+function drawHouseRoof() {
     // The roof
     push();
     noStroke();
@@ -60,7 +84,8 @@ function draw() {
     fill("#dc143c");
     triangle(180, 240, 340, 120, 500, 240);
     pop();
-
+}
+function drawHouseWindow() {
     // A window
     push();
     // You can also write colour names from the CSS standard in quotes
@@ -70,16 +95,16 @@ function draw() {
     fill("blanchedalmond");
     rect(220, 260, 80, 80);
     pop();
-
-    // An entrace
-
+}
+function drawHouseDoor() {
     // The door
     push();
     noStroke();
     fill(0, 128, 0);
     rect(320, 300, 80, 120);
     pop();
-
+}
+function drawhouseDoorknob() {
     // The doorknob
     push();
     noStroke();
