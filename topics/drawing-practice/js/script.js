@@ -1,24 +1,42 @@
 /**
- * Title of Project
- * Author Name
+ * Record Drawing
+ * Alex Chardon
  * 
- * HOW EMBARRASSING! I HAVE NO DESCRIPTION OF MY PROJECT!
- * PLEASE REMOVE A GRADE FROM MY WORK IF IT'S GRADED!
+ * displays a simple record
  */
 
 "use strict";
 
 /**
- * OH LOOK I DIDN'T DESCRIBE SETUP!!
+ * creates a square background
 */
 function setup() {
-
+    createCanvas(640, 640);
 }
 
 
 /**
- * OOPS I DIDN'T DESCRIBE WHAT MY DRAW DOES!
+ * displays the record
 */
 function draw() {
-
+    //background of the record
+    background(90, 12, 39);
+    //main part of the record
+    push();
+    fill("#000000");
+    stroke(25);
+    ellipse(320, 320, 480);
+    pop();
+    //inner part of the record
+    push();
+    fill(50);
+    noStroke();
+    ellipse(320, 320, 140, 140);
+    pop();
+    //hole of the record
+    push();
+    fill("black");
+    noStroke();
+    ellipse(320, 320, 20);
+    pop();
 }
