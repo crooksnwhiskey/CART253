@@ -71,8 +71,35 @@ function drawNet() {
     pop();
 }
 function drawMan() {
+    //left leg
+
     push();
     fill("black")
     rect(400, 450, 10, 60);
+    pop();
+    //right leg
+    push();
+    fill("black")
+    rect(420, 450, 10, 60);
+    pop();
+    //torso
+    push();
+    fill("black")
+    rect(400, 400, 30, 60);
+    pop();
+    //arm
+    push();
+    fill("black")
+    rect(430, 350, 10, 60);
+    pop();
+    //hand
+    push();
+    fill("black")
+    rect(440, 350, 15, 10);
+    pop();
+    //face
+    push();
+    fill("black");
+    ellipse(410, 390, 30)
     pop();
 }
