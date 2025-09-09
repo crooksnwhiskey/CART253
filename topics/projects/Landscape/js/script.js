@@ -26,7 +26,9 @@ function draw() {
     background(100, 149, 237);
     drawSun();
     drawLand();
-
+    drawBall();
+    drawNet();
+    drawMan();
 
 }
 function drawSun() {
@@ -45,5 +47,32 @@ function drawLand() {
     rect(0, 500, 800, 200,);
 
 
+    pop();
+}
+function drawBall() {
+    push();
+    fill("orange");
+    ellipse(700, 100, 30);
+    pop();
+}
+function drawNet() {
+    push();//pole
+    fill("grey")
+    rect(650, 400, 20, 150);
+    pop();
+
+    push();//back
+    rect(550, 250, 200, 150);
+    pop();
+
+    push();//rim
+    fill("red");
+    rect(620, 375, 80, 10);
+    pop();
+}
+function drawMan() {
+    push();
+    fill("black")
+    rect(400, 450, 10, 60);
     pop();
 }
