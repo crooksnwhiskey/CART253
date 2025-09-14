@@ -7,7 +7,14 @@
 
 "use strict";
 
+let sky = {
+    x: 60,
+    y: 50,
+    width: 140,
+    height: 200
 
+
+};
 /**
  * creates a canvas
 */
@@ -36,7 +43,15 @@ function drawDesk() {
     pop();
 }
 function drawOutside() {
+    drawSky();
 
+    function drawSky() {
+        push();
+        fill('navy');
+        noStroke();
+        rect(sky.x, sky.y, sky.width, sky.height);
+        pop();
+    }
 }
 function drawWindow() {
     //left vertical
@@ -55,7 +70,7 @@ function drawWindow() {
     push();
     fill("white");
     noStroke();
-    rect(50, 39, 160, 10)
+    rect(50, 40, 160, 10)
     pop();
     //bottom top
     push();
