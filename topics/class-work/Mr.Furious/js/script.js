@@ -1,12 +1,13 @@
 /**
  * Mr. Furious
- * Pippin Barr
+ * alex Chardon
  *
  * A guy who becomes visibly furious!
  */
 
 "use strict";
 
+const rate = 20
 // Our friend Mr. Furious
 let mrFurious = {
     // Position and size
@@ -15,10 +16,23 @@ let mrFurious = {
     size: 100,
     // Colour
     fill: {
-        r: 255,
-        g: 225,
-        b: 225
+        r: 50,
+        g: 0,
+        b: 0
     }
+};
+
+let sky = {
+    r: 0,
+    g: 0,
+    b: 255
+};
+let bird = {
+    x: undefined,
+    y: undefined,
+    size: 20,
+    speed: 10
+
 };
 
 /**
@@ -26,18 +40,37 @@ let mrFurious = {
  */
 function setup() {
     createCanvas(400, 400);
+    //sets framerate
+    frameRate(rate);
+    //sets bird position
+    bird.x = 50;
+    bird.y = 50;
 }
+
 
 /**
  * Draw (and update) Mr. Furious
  */
 function draw() {
-    background(160, 180, 200);
+    background(sky.r, sky.g, sky.b);
+
+    //makes sky change colour
+    sky.b = sky.b - 10;
+    // makes him redder
+    mrFurious.fill.r = mrFurious.fill.r + 5;
 
     // Draw Mr. Furious as a coloured circle
     push();
     noStroke();
+
+
+    mrFurious.x += random(1, 20);
+    mrFurious.x -= random(1, 20);
     fill(mrFurious.fill.r, mrFurious.fill.g, mrFurious.fill.b);
     ellipse(mrFurious.x, mrFurious.y, mrFurious.size);
     pop();
+
+    bird.x += bird.speed;
+
+    ellipse(bird.x, bird.y, bird.size);
 }
