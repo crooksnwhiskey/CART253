@@ -54,6 +54,9 @@ function drawOutside() {
     }
 }
 function drawWindow() {
+
+    //I realized after doing all this I couldve just drawn one rectangle
+
     //left vertical
     push();
     fill("white");
