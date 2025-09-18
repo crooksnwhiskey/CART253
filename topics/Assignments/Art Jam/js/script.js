@@ -11,7 +11,10 @@ let sky = {
     x: 60,
     y: 50,
     width: 140,
-    height: 200
+    height: 200,
+    r: 0,
+    g: 0,
+    b: 130
 
 
 };
@@ -38,7 +41,7 @@ function draw() {
 }
 function drawDesk() {
     push();
-    fill("#8e857c");
+    fill("#8c8279ff");
     rect(30, 400, 580, 200);
     pop();
 }
@@ -47,10 +50,15 @@ function drawOutside() {
 
     function drawSky() {
         push();
-        fill('navy');
+        fill(sky.r, sky.g, sky.b);
         noStroke();
         rect(sky.x, sky.y, sky.width, sky.height);
         pop();
+
+        if (sky.b <= 0) {
+
+        }
+
     }
 }
 function drawWindow() {
