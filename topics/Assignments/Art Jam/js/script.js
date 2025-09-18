@@ -49,15 +49,21 @@ function drawOutside() {
     drawSky();
 
     function drawSky() {
+        sky.b += -1
+        if (sky.b <= 0) {
+            sky.b += .2;
+
+        }
+        else if (sky.b >= 130) {
+            sky.b -= .2;
+        }
+
         push();
         fill(sky.r, sky.g, sky.b);
         noStroke();
         rect(sky.x, sky.y, sky.width, sky.height);
         pop();
 
-        if (sky.b <= 0) {
-
-        }
 
     }
 }
