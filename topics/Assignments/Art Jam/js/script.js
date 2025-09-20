@@ -18,6 +18,8 @@ let sky = { //info for the sky
 
 
 };
+
+let skyChange = 0.2;//sky change variable
 /**
  * creates a canvas
 */
@@ -51,12 +53,16 @@ function drawOutside() {
     function drawSky() {
         //draws the sky colour changing from night to day
 
+
+
+        sky.b += skyChange;
+
         if (sky.b >= 130) {
-            sky.b += -.2;
+            skyChange += -1;
 
         }
         else if (sky.b <= 0) {
-            sky.b += .2;
+            skyChange += 1;
         }
         // draws the sky
         push();
