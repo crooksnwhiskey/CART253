@@ -7,7 +7,7 @@
 
 "use strict";
 
-let sky = {
+let sky = { //info for the sky
     x: 60,
     y: 50,
     width: 140,
@@ -49,15 +49,16 @@ function drawOutside() {
     drawSky();
 
     function drawSky() {
-        sky.b += -1
-        if (sky.b <= 0) {
+        //draws the sky colour changing from night to day
+
+        if (sky.b >= 130) {
+            sky.b += -.2;
+
+        }
+        else if (sky.b <= 0) {
             sky.b += .2;
-
         }
-        else if (sky.b >= 130) {
-            sky.b -= .2;
-        }
-
+        // draws the sky
         push();
         fill(sky.r, sky.g, sky.b);
         noStroke();
@@ -101,4 +102,8 @@ function drawWindow() {
     noStroke();
     rect(50, 261, 160, 10)
     pop();
+}
+
+function drawBody() {
+
 }
