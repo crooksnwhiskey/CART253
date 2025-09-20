@@ -36,33 +36,28 @@ function setup() {
 function draw() {
 
     background(240, 235, 235);//wall colour
-    drawDesk(); // draws the desk
     drawOutside();//draws the outside world changing
     drawWindow(); // draws the window frame
+    drawHood();//draws hood
+    drawFace();//draws void of a face
+    drawDesk(); // draws the desk
+    drawWindowBars();//keeps me locked up
+}
 
-}
-function drawDesk() {
-    push();
-    fill("#8c8279ff");
-    rect(30, 400, 580, 200);
-    pop();
-}
 function drawOutside() {
     drawSky();
 
     function drawSky() {
         //draws the sky colour changing from night to day
 
-
-
         sky.b += skyChange;
 
         if (sky.b >= 130) {
-            skyChange += -1;
+            skyChange = -1;
 
         }
         else if (sky.b <= 0) {
-            skyChange += 1;
+            skyChange = 1;
         }
         // draws the sky
         push();
@@ -109,7 +104,54 @@ function drawWindow() {
     rect(50, 261, 160, 10)
     pop();
 }
+function drawHood() { // draws green hood
+    push();
+    fill("#202f17f3")
 
-function drawBody() {
+    ellipse(450, 400, 200, 500);
+    pop();
+}
+function drawFace() { // draws face
+    push();
+    fill("#000000f3")
+    noStroke();
+    ellipse(450, 400, 175, 475);
+    pop();
+
+    push();//left eye
+    fill("#7a0000f3")
+    noStroke();
+    ellipse(425, 250, 10);
+    pop();
+
+    push();//right eye
+    fill("#7a0000f3")
+    noStroke();
+    ellipse(475, 250, 10);
+    pop();
+}
+function drawDesk() {// draws the desk
+    push();
+    fill("#8c8279ff");
+    rect(30, 400, 580, 200);
+    pop();
+}
+function drawWindowBars() {
+    push();
+    fill("#575757ff");
+    rect(70, 50, 10, 200);
+    pop();
+    push();
+    fill("#575757ff");
+    rect(105, 50, 10, 200);
+    pop();
+    push();
+    fill("#575757ff");
+    rect(145, 50, 10, 200);
+    pop();
+    push();
+    fill("#575757ff");
+    rect(180, 50, 10, 200);
+    pop();
 
 }
