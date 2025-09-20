@@ -19,6 +19,15 @@ let sky = { //info for the sky
 
 };
 
+let box = {//info for the music player base
+    x: 70,
+    y: 350,
+    width: 150,
+    height: 80,
+    r: 0,
+    g: 0,
+    b: 0
+};
 let skyChange = 0.2;//sky change variable
 /**
  * creates a canvas
@@ -26,8 +35,17 @@ let skyChange = 0.2;//sky change variable
 function setup() {
 
     createCanvas(640, 480);
+    background(240, 235, 235);//wall colour
 
+    let pauseButton = createButton("||"); // this Is new, I got it from p5.js
+    pauseButton.position(200, 520);
+    pauseButton.mousePressed(pauseSong);
+
+    let playButton = createButton("I>"); // this Is new, I got it from p5.js
+    playButton.position(170, 520);
+    playButton.mousePressed(playSong);
 }
+
 
 
 /**
@@ -35,13 +53,13 @@ function setup() {
 */
 function draw() {
 
-    background(240, 235, 235);//wall colour
     drawOutside();//draws the outside world changing
     drawWindow(); // draws the window frame
     drawHood();//draws hood
     drawFace();//draws void of a face
     drawDesk(); // draws the desk
     drawWindowBars();//keeps me locked up
+    boomBox();
 }
 
 function drawOutside() {
@@ -153,5 +171,19 @@ function drawWindowBars() {
     fill("#575757ff");
     rect(180, 50, 10, 200);
     pop();
+
+}
+function boomBox() {
+
+    push();
+    noStroke();
+    fill(0);
+    rect(box.x, box.y, box.width, box.height);
+    pop();
+}
+function playSong() {
+
+}
+function pauseSong() {
 
 }
