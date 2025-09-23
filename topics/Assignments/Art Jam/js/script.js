@@ -32,18 +32,28 @@ let skyChange = 0.2;//sky change variable
 /**
  * creates a canvas
 */
+
+let pauseButton
+let playButton
+
 function setup() {
 
     createCanvas(640, 480);
     background(240, 235, 235);//wall colour
 
-    let pauseButton = createButton("||"); // this Is new, I got it from p5.js
-    pauseButton.position(200, 520);
+    pauseButton = createButton("||"); // this Is new, I got it from p5.js
+    pauseButton.size(25, 25);
     pauseButton.mousePressed(pauseSong);
+    pauseButton.position(150, -80, 'relative');
 
-    let playButton = createButton("I>"); // this Is new, I got it from p5.js
-    playButton.position(170, 520);
+
+
+    playButton = createButton("I>"); // this Is new, I got it from p5.js
+    playButton.size(25, 25);
     playButton.mousePressed(playSong);
+    playButton.position(110, -105, 'relative');
+
+
 }
 
 
@@ -60,11 +70,14 @@ function draw() {
     drawDesk(); // draws the desk
     drawWindowBars();//keeps me locked up
     boomBox();
+
+
+
 }
 
 function drawOutside() {
-    drawSky();
 
+    drawSky();
     function drawSky() {
         //draws the sky colour changing from night to day
 
