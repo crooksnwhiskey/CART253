@@ -39,6 +39,8 @@ function draw() {
     // Draw the user and puck
     drawUser();
     drawPuck();
+    // moves puck
+    movePuck();
 }
 
 /**
@@ -69,4 +71,26 @@ function drawPuck() {
     fill(puck.fill);
     ellipse(puck.x, puck.y, puck.size);
     pop();
+}
+function movePuck() {
+    const d = dist(user.x, user.y, puck.x, puck.y);
+    const overlap = (d < user.size / 2 + puck.size / 2);
+
+    if (overlap) {
+        if (puck.x > user.x) {
+            puck.x += 1
+
+        }
+        if (puck.x < user.x) {
+            puck.x -= 1
+
+        }
+        if (puck.y > user.y) {
+            puck.y += 1
+        }
+        if (puck.y < user.y) {
+            puck.y -= 1
+        }
+
+    }
 }
