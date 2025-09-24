@@ -50,16 +50,16 @@ function setup() {
     background(240, 235, 235);//wall colour
 
     pauseButton = createButton("||"); // this Is new, I got it from p5.js
-    pauseButton.size(25, 25);
+    pauseButton.size(25, 25);//size of buttons
     pauseButton.mousePressed(pauseSong);
-    pauseButton.position(150, -80, 'relative');// makes buttons move with canvas (help from michael)
+    pauseButton.position(145, -80, 'relative');// makes buttons move with canvas (help from michael)
 
 
 
     playButton = createButton("I>"); // this Is new, I got it from p5.js
     playButton.size(25, 25);
     playButton.mousePressed(playSong);
-    playButton.position(110, -105, 'relative');
+    playButton.position(115, -105, 'relative');
 
 
 }
@@ -77,7 +77,7 @@ function draw() {
     drawFace();//draws void of a face
     drawDesk(); // draws the desk
     drawWindowBars();//keeps me locked up
-    boomBox();
+    boomBox();//music box
 
 
 
@@ -196,19 +196,62 @@ function drawWindowBars() {
 }
 function boomBox() {
 
-    push();
-    noStroke();
-    fill(0);
+    push();//draws the frame
+    strokeWeight(2);
+    fill(70);
     rect(box.x, box.y, box.width, box.height, 6,);
+    pop();
+
+    push();//left speaker outer
+    strokeWeight(2);
+    fill(10);
+    ellipse(110, 377, 50)
+    pop();
+
+    push();//right speaker outer
+    strokeWeight(2);
+    fill(10);
+    ellipse(180, 377, 50)
+    pop();
+
+    push();//right speaker inner
+    strokeWeight(2);
+    fill(200);
+    ellipse(180, 377, 30)
+    pop();
+
+    push();//right speaker outer
+    strokeWeight(2);
+    fill(200);
+    ellipse(110, 377, 30)
+    pop();
+
+    push();//draws handel
+    strokeWeight(2);
+    fill(100);
+    rect(105, 321, 10, 30, 15,)
+    pop();
+
+    push();//draws handel
+    strokeWeight(2);
+    fill(100);
+    rect(175, 321, 10, 30, 15,)
+    pop();
+
+    push();//draws handel
+    strokeWeight(2);
+    fill(100);
+    rect(105, 320, 80, 10, 15,)
     pop();
 }
 function playSong() {
-    if (!song.isPlaying()) {
-        song.loop();
+    if (!song.isPlaying()) {//checks if the song isnt playing
+        song.loop();//if its not, it plays the song
     }
 }
 function pauseSong() {
+    //checks if song is playing
     if (song.isPlaying()) {
-        song.pause()
+        song.pause()// pauses song if playing
     }
 }
