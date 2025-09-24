@@ -73,8 +73,8 @@ function draw() {
 
     drawOutside();//draws the outside world changing
     drawWindow(); // draws the window frame
-    drawHood();//draws hood
-    drawFace();//draws void of a face
+    drawMe();//draws me
+
     drawDesk(); // draws the desk
     drawWindowBars();//keeps me locked up
     boomBox();//music box
@@ -143,32 +143,39 @@ function drawWindow() {
     rect(50, 261, 160, 10)
     pop();
 }
-function drawHood() { // draws green hood
-    push();
-    fill("#202f17f3")
+function drawMe() { // draws me
 
-    ellipse(450, 400, 200, 500);
-    pop();
+    drawBody();//draws my body
+    drawHead();//draws neck and head
+
+    function drawBody() {
+
+        push();
+        noStroke();
+        fill("#122f02ff");
+        rect(400, 270, 110, 200, 30);
+        pop();
+
+    }
+    function drawHead() {
+        //draws neck
+        push();
+        noStroke();
+        fill("#c6ad8bff");
+        rect(435, 240, 40, 50, 40);
+        pop();
+
+        push();
+        noStroke();
+        fill("#e6caa3ff");
+        ellipse(455, 220, 90, 110)
+        pop();
+
+
+    }
 }
-function drawFace() { // draws face
-    push();
-    fill("#000000f3")
-    noStroke();
-    ellipse(450, 400, 175, 475);
-    pop();
 
-    push();//left eye
-    fill("#7a0000f3")
-    noStroke();
-    ellipse(425, 250, 10);
-    pop();
 
-    push();//right eye
-    fill("#7a0000f3")
-    noStroke();
-    ellipse(475, 250, 10);
-    pop();
-}
 function drawDesk() {// draws the desk
     push();
     fill("#8c8279ff");
