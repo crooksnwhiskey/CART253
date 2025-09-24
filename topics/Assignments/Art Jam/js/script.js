@@ -30,11 +30,19 @@ let box = {//info for the music player base
 };
 let skyChange = 0.2;//sky change variable
 /**
- * creates a canvas
+
 */
 
-let pauseButton
-let playButton
+let pauseButton;
+let playButton;
+
+let song;
+function preload() {
+    song = loadSound("assets/sounds/bird.wav");// took forever to figure out how to load this sound
+
+}
+
+
 
 function setup() {
 
@@ -44,7 +52,7 @@ function setup() {
     pauseButton = createButton("||"); // this Is new, I got it from p5.js
     pauseButton.size(25, 25);
     pauseButton.mousePressed(pauseSong);
-    pauseButton.position(150, -80, 'relative');
+    pauseButton.position(150, -80, 'relative');// makes buttons move with canvas (help from michael)
 
 
 
@@ -191,12 +199,16 @@ function boomBox() {
     push();
     noStroke();
     fill(0);
-    rect(box.x, box.y, box.width, box.height);
+    rect(box.x, box.y, box.width, box.height, 6,);
     pop();
 }
 function playSong() {
-
+    if (!song.isPlaying()) {
+        song.loop();
+    }
 }
 function pauseSong() {
-
+    if (song.isPlaying()) {
+        song.pause()
+    }
 }
