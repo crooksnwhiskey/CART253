@@ -5,6 +5,8 @@
  * drawing a self portrait that accurately shows myself doing this assignment
  */
 
+//REMEMBER TO FIX ARMS
+
 "use strict";
 
 let sky = { //info for the sky
@@ -60,6 +62,8 @@ function setup() {
     playButton.size(25, 25);
     playButton.mousePressed(playSong);
     playButton.position(115, -105, 'relative');
+
+
 
 
 }
@@ -147,6 +151,7 @@ function drawMe() { // draws me
 
     drawBody();//draws my body
     drawHead();//draws neck and head
+    drawArms();//draws arms
 
     function drawBody() {
 
@@ -172,6 +177,17 @@ function drawMe() { // draws me
         pop();
 
 
+    }
+    function drawArms() {
+        push();
+        angleMode(DEGREES);
+        translate(400, 270)
+        noStroke();
+        fill("#122f02ff");
+        translate(390, 280,)
+        rotate(30);
+        rect(-25, -125, 50, 200);
+        pop();
     }
 }
 
