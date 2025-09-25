@@ -74,6 +74,13 @@ function setup() {
 */
 function draw() {
 
+    // draws back of hair... I had to sneak this in somewhere
+    push();
+    fill(0)
+    ellipse(455, 225, 100, 60)
+    pop()
+
+
     drawOutside();//draws the outside world changing
     drawWindow(); // draws the window frame
     drawMe();//draws me
@@ -82,6 +89,8 @@ function draw() {
     drawDesk(); // draws the desk
     drawWindowBars();//keeps me locked up
     boomBox();//music box
+
+
 
 
 
@@ -146,6 +155,8 @@ function drawWindow() {
     noStroke();
     rect(50, 261, 160, 10)
     pop();
+
+
 }
 function drawMe() { // draws me
 
@@ -156,7 +167,7 @@ function drawMe() { // draws me
     function drawBody() {
 
         push();
-        noStroke();
+        strokeWeight(2);
         fill("#122f02ff");
         rect(380, 270, 145, 200, 30);
         pop();
@@ -165,13 +176,13 @@ function drawMe() { // draws me
     function drawHead() {
         //draws neck
         push();
-        noStroke();
-        fill("#c6ad8bff");
+        strokeWeight(2);
+        fill("#b3a189ff");
         rect(435, 240, 40, 50, 40);
         pop();
 
         push();// draws head shape
-        noStroke();
+        strokeWeight(1);
         fill("#e6caa3ff");
         ellipse(455, 220, 90, 110)
         pop();
@@ -204,6 +215,7 @@ function drawFace() {
     drawEyes();
     drawNose();
     drawMouth();
+    drawEyebrows();
 
     function drawEyes() {
         push();//draws eyebag L
@@ -246,18 +258,84 @@ function drawFace() {
         line(440, 250, 470, 250)
     }
 }
-function drawHair() {
+function drawEyebrows() {
+
+    push();
+    strokeWeight(4);
+    fill(0);
+    line(425, 215, 450, 215)
+    line(460, 215, 485, 215)
+    pop();
+}
+function drawHair() {//draws my hair
+    let hair = {
+        x: 420,
+        y: 195,
+        size: 30
+    }
+    push();
+    fill(0)
+    ellipse(hair.x, hair.y, hair.size)
+    pop();
+
+    push();
+    fill(0)
+    ellipse(hair.x + 15, hair.y - 15, hair.size)
+    pop();
+
+    push();
+    fill(0)
+    ellipse(hair.x + 35, hair.y - 20, hair.size)
+    pop();
+
+    push();
+    fill(0)
+    ellipse(hair.x + 55, hair.y - 15, hair.size)
+    pop();
+
+    push();
+    fill(0)
+    ellipse(hair.x + 70, hair.y, hair.size)
+    pop();
+
+    push();
+    fill(0)
+    ellipse(hair.x + 35, hair.y - 5, hair.size)
+    pop();
+
+    push();
+    fill(0)
+    ellipse(hair.x + 50, hair.y - 5, hair.size)
+    pop();
+
+    push();
+    fill(0)
+    ellipse(hair.x + 20, hair.y - 5, hair.size)
+    pop();
+
+    push();
+    fill(0)
+    ellipse(hair.x - 7, hair.y + 15, hair.size / 2)
+    pop();
+
+    push();
+    fill(0)
+    ellipse(hair.x + 77, hair.y + 15, hair.size / 2)
+    pop();
+
 
 }
 
 function drawDesk() {// draws the desk
     push();
+    strokeWeight(2);
     fill("#8c8279ff");
     rect(30, 400, 580, 200);
     pop();
 }
 function drawWindowBars() {
     push();
+    strokeWeight(2);
     fill("#575757ff");
     rect(70, 50, 10, 200);
     pop();
