@@ -43,12 +43,18 @@ function preload() {
     song = loadSound("assets/sounds/bird.wav");
 }
 
+let creature = {
+    x: 370,
+    y: 130,
+    width: 30,
+    height: 20,
+    direction: 1
+}
 
 
 function setup() {
 
     createCanvas(640, 480);
-    background(240, 235, 235);//wall colour
 
     pauseButton = createButton("||"); // this Is new, I got it from p5.js
     pauseButton.size(25, 25);//size of buttons
@@ -73,6 +79,7 @@ function setup() {
  * draws myself in a room at a desk
 */
 function draw() {
+    background(240, 235, 235);//wall colour
 
     // draws back of hair... I had to sneak this in somewhere
     push();
@@ -89,7 +96,10 @@ function draw() {
     drawDesk(); // draws the desk
     drawWindowBars();//keeps me locked up
     boomBox();//music box
+    drawShelf();//draws shelf
+    drawCreature();//draws interactive mouse
 
+    moveCreature(); //moves the creature away from user input
 
 
 
@@ -340,14 +350,17 @@ function drawWindowBars() {
     rect(70, 50, 10, 200);
     pop();
     push();
+    strokeWeight(2);
     fill("#575757ff");
     rect(105, 50, 10, 200);
     pop();
     push();
+    strokeWeight(2);
     fill("#575757ff");
     rect(145, 50, 10, 200);
     pop();
     push();
+    strokeWeight(2);
     fill("#575757ff");
     rect(180, 50, 10, 200);
     pop();
@@ -414,6 +427,70 @@ function pauseSong() {
         song.pause()// pauses song if playing
     }
 }
+function drawShelf() {
+    push();
+    strokeWeight(2);
+    fill("#bb6f48ff");
+    rect(350, 130, 200, 10)
+    pop();
+
+}
+function drawCreature() {
+
+    push();// body
+    fill("rgba(150, 150, 154, 1)")
+    arc(creature.x, creature.y, creature.width, creature.height, PI, 0);
+    pop();
+
+    push();//eye
+    ellipse(creature.x - 10, creature.y - 5, 5);
+    pop();
+    push();//eye PUPIL
+    fill(0)
+    ellipse(creature.x - 11, creature.y - 5, 3);
+    pop();
+
+    push();//nose
+    strokeWeight(0.5);
+    fill("pink");
+    ellipse(creature.x - 15, creature.y - 2, 3);
+    pop();
+
+    push();//tail
+    noFill();
+    strokeWeight(1)
+    bezier(creature.x + 15, creature.y - 2, creature.x + 30, creature.y - 5, creature.x - 20, creature.y - 20, creature.x + 15, creature.y - 15);
+    pop();
+
+    push();//ear
+    strokeWeight(1)
+    fill("rgba(150, 150, 154, 1)")
+    ellipse(creature.x - 7, creature.y - 10, 5);
+    pop();
+
+    push();//ear
+    strokeWeight(1)
+    fill("rgba(150, 150, 154, 1)")
+    ellipse(creature.x - 5, creature.y - 10, 5);
+    pop();
+
+}
+
+function moveCreature() {
+    const d = dist(mouseX, mouseY, creature.x, creature.y);
 
 
-//https://p5js.org/examples/shapes-and-color-shape-primitives/
+    if (d < 80) {
+        if (mouseX < creature.x) {
+            creature.x += 1;
+
+
+        }
+        else {
+            creature.x -= 1;
+
+        }
+    }
+    creature.x = constrain(creature.x, 370, 530);
+}
+
