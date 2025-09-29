@@ -14,9 +14,9 @@ let sky = { //info for the sky
     y: 50,
     width: 140,
     height: 200,
-    r: 0,
-    g: 0,
-    b: 130
+    r: 33,
+    g: 30,
+    b: 255
 
 
 };
@@ -81,17 +81,14 @@ function setup() {
 function draw() {
     background(240, 235, 235);//wall colour
 
-    // draws back of hair... I had to sneak this in somewhere
-    push();
-    fill(0)
-    ellipse(455, 225, 100, 60)
-    pop()
+
 
 
     drawOutside();//draws the outside world changing
     drawWindow(); // draws the window frame
+    drawBackgroundHair();//draws the hair behind my head
     drawMe();//draws me
-    drawFace();//draws face
+    drawFace();//draws face s
     drawHair();//draws my lucious hair
     drawDesk(); // draws the desk
     drawWindowBars();//keeps me locked up
@@ -106,21 +103,23 @@ function draw() {
 
 }
 
-function drawOutside() {
+function drawOutside() {//draws the sky colour changing from night to day
 
     drawSky();
     function drawSky() {
-        //draws the sky colour changing from night to day
+
 
         sky.b += skyChange;
 
-        if (sky.b >= 130) {
+        if (sky.b >= 250) {
             skyChange = -1;
 
         }
-        else if (sky.b <= 0) {
+        else if (sky.b <= 30) {
             skyChange = 1;
         }
+
+
         // draws the sky
         push();
         fill(sky.r, sky.g, sky.b);
@@ -133,7 +132,7 @@ function drawOutside() {
 }
 function drawWindow() {
 
-    //I realized after doing all this I couldve just drawn one rectangle
+    //I realized after doing all this I couldve just drawn one rectangle oops
 
     //left vertical
     push();
@@ -480,7 +479,7 @@ function moveCreature() {
     const d = dist(mouseX, mouseY, creature.x, creature.y);
 
 
-    if (d < 80) {
+    if (d < 70) {
         if (mouseX < creature.x) {
             creature.x += 1;
 
@@ -493,4 +492,10 @@ function moveCreature() {
     }
     creature.x = constrain(creature.x, 370, 530);
 }
-
+function drawBackgroundHair() {
+    // draws back of hair... I had to sneak this in somewhere
+    push();
+    fill(0)
+    ellipse(455, 225, 100, 60)
+    pop()
+}
