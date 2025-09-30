@@ -221,10 +221,10 @@ function drawFace() {
         height: 20
 
     }
-    drawEyes();
-    drawNose();
-    drawMouth();
-    drawEyebrows();
+    drawEyes();//draws eyes
+    drawNose();//draws nose
+    drawMouth();//draws mouth line
+    drawEyebrows();//draws eyebrows
 
     function drawEyes() {
         push();//draws eyebag L
@@ -342,7 +342,7 @@ function drawDesk() {// draws the desk
     rect(30, 400, 580, 200);
     pop();
 }
-function drawWindowBars() {
+function drawWindowBars() {//draws the bars on the window
     push();
     strokeWeight(2);
     fill("#575757ff");
@@ -365,7 +365,7 @@ function drawWindowBars() {
     pop();
 
 }
-function boomBox() {
+function boomBox() {// creates the music player that is interactive
 
     push();//draws the frame
     strokeWeight(2);
@@ -426,7 +426,7 @@ function pauseSong() {
         song.pause()// pauses song if playing
     }
 }
-function drawShelf() {
+function drawShelf() {//draws the floating shelf
     push();
     strokeWeight(2);
     fill("#bb6f48ff");
@@ -434,7 +434,7 @@ function drawShelf() {
     pop();
 
 }
-function drawCreature() {
+function drawCreature() {//draws the little mouse
 
     push();// body
     fill("rgba(150, 150, 154, 1)")
@@ -475,7 +475,7 @@ function drawCreature() {
 
 }
 
-function moveCreature() {
+function moveCreature() {// moves the mouse according to the users input
     const d = dist(mouseX, mouseY, creature.x, creature.y);
 
 
