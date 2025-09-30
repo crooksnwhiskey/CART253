@@ -138,31 +138,31 @@ function drawWindow() {
     push();
     fill("white");
     noStroke();
-    rect(50, 50, 10, 200)
+    rect(50, 50, 10, 200);
     pop();
     //right vertical
     push();
     fill("white");
     noStroke();
-    rect(200, 50, 10, 200)
+    rect(200, 50, 10, 200);
     pop();
     //top horizontal
     push();
     fill("white");
     noStroke();
-    rect(50, 40, 160, 10)
+    rect(50, 40, 160, 10);
     pop();
     //bottom top
     push();
     fill("white");
     noStroke();
-    rect(30, 250, 200, 10)
+    rect(30, 250, 200, 10);
     pop();
     //bottom bottom
     push();
     fill("white");
     noStroke();
-    rect(50, 261, 160, 10)
+    rect(50, 261, 160, 10);
     pop();
 
 
@@ -193,7 +193,7 @@ function drawMe() { // draws me
         push();// draws head shape
         strokeWeight(1);
         fill("#e6caa3ff");
-        ellipse(455, 220, 90, 110)
+        ellipse(455, 220, 90, 110);
         pop();
 
 
@@ -229,18 +229,18 @@ function drawFace() {
     function drawEyes() {
         push();//draws eyebag L
         noStroke();
-        fill("#947557ff")
+        fill("#947557ff");
         arc(eyes.x, eyes.y + 3, eyes.width, eyes.height + 5, 0, PI);
         pop();
 
         push();//draws eyebag R
         noStroke();
-        fill("#947557ff")
+        fill("#947557ff");
         arc(eyes.x + 30, eyes.y + 3, eyes.width, eyes.height + 5, 0, PI);
         pop();
 
         push();//draws eye L
-        arc(eyes.x, eyes.y, eyes.width, eyes.height, 0, PI)
+        arc(eyes.x, eyes.y, eyes.width, eyes.height, 0, PI);
         pop();
 
         push();//draws pupil L
@@ -272,8 +272,8 @@ function drawEyebrows() {
     push();
     strokeWeight(4);
     fill(0);
-    line(425, 215, 450, 215)
-    line(460, 215, 485, 215)
+    line(425, 215, 450, 215);
+    line(460, 215, 485, 215);
     pop();
 }
 function drawHair() {//draws my hair
@@ -283,53 +283,53 @@ function drawHair() {//draws my hair
         size: 30
     }
     push();
-    fill(0)
-    ellipse(hair.x, hair.y, hair.size)
+    fill(0);
+    ellipse(hair.x, hair.y, hair.size);
     pop();
 
     push();
-    fill(0)
-    ellipse(hair.x + 15, hair.y - 15, hair.size)
+    fill(0);
+    ellipse(hair.x + 15, hair.y - 15, hair.size);
     pop();
 
     push();
-    fill(0)
-    ellipse(hair.x + 35, hair.y - 20, hair.size)
+    fill(0);
+    ellipse(hair.x + 35, hair.y - 20, hair.size);
     pop();
 
     push();
-    fill(0)
-    ellipse(hair.x + 55, hair.y - 15, hair.size)
+    fill(0);
+    ellipse(hair.x + 55, hair.y - 15, hair.size);
     pop();
 
     push();
-    fill(0)
-    ellipse(hair.x + 70, hair.y, hair.size)
+    fill(0);
+    ellipse(hair.x + 70, hair.y, hair.size);
     pop();
 
     push();
-    fill(0)
-    ellipse(hair.x + 35, hair.y - 5, hair.size)
+    fill(0);
+    ellipse(hair.x + 35, hair.y - 5, hair.size);
     pop();
 
     push();
-    fill(0)
-    ellipse(hair.x + 50, hair.y - 5, hair.size)
+    fill(0);
+    ellipse(hair.x + 50, hair.y - 5, hair.size);
     pop();
 
     push();
-    fill(0)
-    ellipse(hair.x + 20, hair.y - 5, hair.size)
+    fill(0);
+    ellipse(hair.x + 20, hair.y - 5, hair.size);
     pop();
 
     push();
-    fill(0)
-    ellipse(hair.x - 7, hair.y + 15, hair.size / 2)
+    fill(0);
+    ellipse(hair.x - 7, hair.y + 15, hair.size / 2);
     pop();
 
     push();
-    fill(0)
-    ellipse(hair.x + 77, hair.y + 15, hair.size / 2)
+    fill(0);
+    ellipse(hair.x + 77, hair.y + 15, hair.size / 2);
     pop();
 
 
@@ -376,53 +376,53 @@ function boomBox() {// creates the music player that is interactive
     push();//left speaker outer
     strokeWeight(2);
     fill(10);
-    ellipse(110, 377, 50)
+    ellipse(110, 377, 50);
     pop();
 
     push();//right speaker outer
     strokeWeight(2);
     fill(10);
-    ellipse(180, 377, 50)
+    ellipse(180, 377, 50);
     pop();
 
     push();//right speaker inner
     strokeWeight(2);
     fill(200);
-    ellipse(180, 377, 30)
+    ellipse(180, 377, 30);
     pop();
 
     push();//right speaker outer
     strokeWeight(2);
     fill(200);
-    ellipse(110, 377, 30)
+    ellipse(110, 377, 30);
     pop();
 
     push();//draws handel
     strokeWeight(2);
     fill(100);
-    rect(105, 321, 10, 30, 15,)
+    rect(105, 321, 10, 30, 15,);
     pop();
 
     push();//draws handel
     strokeWeight(2);
     fill(100);
-    rect(175, 321, 10, 30, 15,)
+    rect(175, 321, 10, 30, 15,);
     pop();
 
     push();//draws handel
     strokeWeight(2);
     fill(100);
-    rect(105, 320, 80, 10, 15,)
+    rect(105, 320, 80, 10, 15,);
     pop();
 }
 function playSong() {
-    if (!song.isPlaying()) {//checks if the song isnt playing
+    if (!song.isPlaying()); {//checks if the song isnt playing
         song.loop();//if its not, it plays the song
     }
 }
 function pauseSong() {
     //checks if song is playing
-    if (song.isPlaying()) {
+    if (song.isPlaying()); {
         song.pause()// pauses song if playing
     }
 }
@@ -430,14 +430,13 @@ function drawShelf() {//draws the floating shelf
     push();
     strokeWeight(2);
     fill("#bb6f48ff");
-    rect(350, 130, 200, 10)
-    pop();
+    rect(350, 130, 200, 10);
 
 }
 function drawCreature() {//draws the little mouse
 
     push();// body
-    fill("rgba(150, 150, 154, 1)")
+    fill("rgba(150, 150, 154, 1)");
     arc(creature.x, creature.y, creature.width, creature.height, PI, 0);
     pop();
 
@@ -445,7 +444,7 @@ function drawCreature() {//draws the little mouse
     ellipse(creature.x - 10, creature.y - 5, 5);
     pop();
     push();//eye PUPIL
-    fill(0)
+    fill(0);
     ellipse(creature.x - 11, creature.y - 5, 3);
     pop();
 
@@ -457,19 +456,19 @@ function drawCreature() {//draws the little mouse
 
     push();//tail
     noFill();
-    strokeWeight(1)
+    strokeWeight(1);
     bezier(creature.x + 15, creature.y - 2, creature.x + 30, creature.y - 5, creature.x - 20, creature.y - 20, creature.x + 15, creature.y - 15);
     pop();
 
     push();//ear
-    strokeWeight(1)
-    fill("rgba(150, 150, 154, 1)")
+    strokeWeight(1);
+    fill("rgba(150, 150, 154, 1)");
     ellipse(creature.x - 7, creature.y - 10, 5);
     pop();
 
     push();//ear
-    strokeWeight(1)
-    fill("rgba(150, 150, 154, 1)")
+    strokeWeight(1);
+    fill("rgba(150, 150, 154, 1)");
     ellipse(creature.x - 5, creature.y - 10, 5);
     pop();
 
@@ -496,6 +495,6 @@ function drawBackgroundHair() {
     // draws back of hair... I had to sneak this in somewhere
     push();
     fill(0)
-    ellipse(455, 225, 100, 60)
-    pop()
+    ellipse(455, 225, 100, 60);
+    pop();
 }
