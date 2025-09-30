@@ -1,6 +1,6 @@
 /**
  * The Only Move Is Not To Play
- * Pippin Barr
+ * Alex Chardon
  *
  * A game where your score increases so long as you do nothing.
  */
@@ -26,12 +26,28 @@ function setup() {
 function draw() {
     background("#87ceeb");
 
+
     // Only increase the score if the game is not over
     if (!gameOver) {
         // Score increases relatively slowly
         score += 0.05;
     }
     displayUI();
+
+    if (keyIsPressed) {
+        gameOver
+    }
+    else if (mouseIsPressed) {
+        gameOver
+    }
+    else if (mouseWheel) {
+        gameOver
+    }
+    else if (mouseDragged) {
+        gameOver
+    }
+
+
 }
 
 /**
@@ -59,4 +75,13 @@ function displayScore() {
     textAlign(CENTER, CENTER);
     text(floor(score), width / 2, height / 2);
     pop();
+}
+function lose() {
+    gameOver = true
+}
+function mouseWheel() {
+    gameOver = true
+}
+function mouseMoved(fxn) {
+    gameOver = true
 }
