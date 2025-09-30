@@ -40,7 +40,7 @@ let playButton;
 
 let song;
 function preload() {
-    song = loadSound("assets/sounds/bird.wav");
+    song = loadSound("assets/sounds/bird.wav"); //I made this years ago idk if i have to credit myself but yeah credit me
 };
 
 let creature = {
@@ -98,7 +98,7 @@ function draw() {
     drawWindow(); // draws the window frame
     drawBackgroundHair();//draws the hair behind my head
     drawMe();//draws me
-    drawFace();//draws face s
+    drawFace();//draws face 
     drawHair();//draws my lucious hair
     drawDesk(); // draws the desk
     drawWindowBars();//keeps me locked up
@@ -219,7 +219,7 @@ function drawMe() { // draws me
     }
 
 }
-function drawFace() {
+function drawFace() {// draws my face, incuding eyes, nose,mouth and eyebrows
     let eyes = {
         x: 440,
         y: 220,
