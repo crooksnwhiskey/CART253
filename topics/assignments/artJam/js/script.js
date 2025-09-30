@@ -14,9 +14,7 @@ let sky = { //info for the sky
     y: 50,
     width: 140,
     height: 200,
-    r: 33,
-    g: 30,
-    b: 255
+
 
 
 };
@@ -30,9 +28,11 @@ let box = {//info for the music player base
     g: 0,
     b: 0
 };
-let skyChange = 0.2;//sky change variable
-/**
 
+let skyChange = 1;//sky change variable
+let skyDirection = 1;//I need this to make the sky colour loop change directions
+/**
+ 
 */
 
 let pauseButton;
@@ -41,7 +41,7 @@ let playButton;
 let song;
 function preload() {
     song = loadSound("assets/sounds/bird.wav");
-}
+};
 
 let creature = {
     x: 370,
@@ -49,8 +49,12 @@ let creature = {
     width: 30,
     height: 20,
     direction: 1
-}
+};
 
+let from;
+let to;
+let interA;
+let interB;
 
 function setup() {
 
@@ -69,6 +73,12 @@ function setup() {
     playButton.position(115, -105, 'relative');
 
 
+    from = color(140, 190, 255); // sets starting sky colour
+    to = color(10, 20, 100);//ending sky colour
+
+    //creates intermediate colours
+    interA = lerpColor(from, to, 0.33);
+    interB = lerpColor(from, to, 0.66);
 
 
 }
@@ -104,25 +114,21 @@ function draw() {
 }
 
 function drawOutside() {//draws the sky colour changing from night to day
-
+    //I got help from Michael here
     drawSky();
     function drawSky() {
 
+        skyChange += 0.005 * skyDirection;// each frame, im moving 0.005 up on a slider from 0-1 
 
-        sky.b += skyChange;
-
-        if (sky.b >= 250) {
-            skyChange = -1;
-
-        }
-        else if (sky.b <= 30) {
-            skyChange = 1;
+        if (skyChange > 1 || skyChange < 0) {// if the skychange variable is bigger than 1 or less than 0 it triggers skyDirection,
+            skyDirection *= -1// multiplies the direction by a negative, changing the direction
         }
 
-
+        let bgColour = lerpColor(from, to, skyChange);
         // draws the sky
         push();
-        fill(sky.r, sky.g, sky.b);
+        fill(bgColour);
+        console.log();
         noStroke();
         rect(sky.x, sky.y, sky.width, sky.height);
         pop();
