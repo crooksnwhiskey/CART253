@@ -431,6 +431,7 @@ function drawShelf() {//draws the floating shelf
     strokeWeight(2);
     fill("#bb6f48ff");
     rect(350, 130, 200, 10);
+    pop();
 
 }
 function drawCreature() {//draws the little mouse
