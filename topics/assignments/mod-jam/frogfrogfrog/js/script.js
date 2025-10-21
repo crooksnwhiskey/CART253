@@ -1,8 +1,8 @@
 /**
- * Frogfrogfrog
- * Pippin Barr
+ * Phraug
+ * Alex Chardon
  * 
- * A game of catching flies with your frog-tongue
+ * A game of catching flies with your Phraug-tongue
  * 
  * Instructions:
  * - Move the frog with your mouse
@@ -16,7 +16,16 @@
 "use strict";
 
 let titleScreen = true;
+let gameOn = false;
 let endScreen = false;
+let startButton = {
+    x: 300,
+    y: 300,
+    width: 200,
+    height: 100,
+    speed: 6
+
+};
 
 
 // Our frog
@@ -58,13 +67,13 @@ function setup() {
 }
 
 function draw() {
-    background("#87ceeb");
-    moveFly();
-    drawFly();
-    moveFrog();
-    moveTongue();
-    drawFrog();
-    checkTongueFlyOverlap();
+    if (titleScreen) {
+        drawTitleScreen();
+    }
+    else if (gameOn) {
+        runGame();
+    }
+
 }
 
 /**
@@ -178,12 +187,85 @@ function checkTongueFlyOverlap() {
 
 /**
  * Launch the tongue on click (if it's not launched yet)
+ * makes the start button clickable
  */
 function mousePressed() {
     if (frog.tongue.state === "idle") {
         frog.tongue.state = "outbound";
     }
-}
-function titleScreen() {
+    if (titleScreen) {
+        if (mouseX < startButton.x + startButton.width / 2 && mouseY < startButton.y + startButton.height / 2
+            && mouseX > startButton.x - startButton.width / 2 && mouseY > startButton.y - startButton.height / 2
+        ) {
+            titleScreen = false;
+            gameOn = true;
+        }
+    }
 
+}
+/**
+ * adds a title screen to the game
+ */
+function drawTitleScreen() {
+    push();
+    background("rgba(44, 103, 41, 1)");//sets background
+    textAlign(CENTER, CENTER);
+    textSize(50);
+    fill("#bff370ff");
+    text("Phraug", width / 2, height / 8);
+    pop();
+
+    drawStartButton();
+    moveStartButton();
+}
+/**draws interactive start button */
+function drawStartButton() {
+    push();
+    rectMode(CENTER); //so useful, makes things relative to the senter of the rect
+    strokeWeight(4);
+    fill("#bff370ff");
+    rect(startButton.x, startButton.y, startButton.width, startButton.height, 30);
+    pop();
+    push();
+    fill("black");
+    textAlign(CENTER, CENTER);
+    textSize(30)
+    text("START", startButton.x, startButton.y);
+    pop();
+}
+/** 
+ * controls the start button running away from cursor
+ */
+function moveStartButton() {
+    const d = dist(mouseX, mouseY, startButton.x, startButton.y);
+
+    if (d < 150) {
+        if (mouseX < startButton.x) {
+            startButton.x += startButton.speed;
+        }
+        if (mouseY < startButton.y) {
+            startButton.y += startButton.speed;
+        }
+        if (mouseX > startButton.x) {
+            startButton.x -= startButton.speed;
+        }
+        if (mouseY > startButton.y) {
+            startButton.y -= startButton.speed;
+        }
+
+        startButton.x = constrain(startButton.x, startButton.width / 2, width - startButton.width / 2);
+        startButton.y = constrain(startButton.y, startButton.height / 2, height - startButton.height / 2);
+    }
+}
+/**
+ * draws the entire gameplay
+ */
+function runGame() {
+    background("#87ceeb");
+    moveFly();
+    drawFly();
+    moveFrog();
+    moveTongue();
+    drawFrog();
+    checkTongueFlyOverlap();
 }
