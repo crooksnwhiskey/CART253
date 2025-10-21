@@ -23,6 +23,9 @@ setup()
     Create a 640x480 canvas
 
 draw()
+   if gamestate is title, 
+   draw titlescreen()
+    else if gamestate is play
     Draw the background // Probably just blue or something
     moveFly()
     drawFly()
@@ -70,3 +73,8 @@ mousePressed()
     if (tongue state is idle)
         set tongue state to outbound
 ```
+frog movement
+
+const x and y
+
+if mouthhole >
