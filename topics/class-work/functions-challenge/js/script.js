@@ -1,5 +1,5 @@
 /**
- * Bouncy Ball Ball Bonanza
+ * Ball so hard
  * Alex Chardon
  * 
  * The starting point for a ball-bouncing experience of
