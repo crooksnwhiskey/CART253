@@ -7,8 +7,8 @@ make the title page nicer
 
 Add end screen to show score and show time 
 
-add scoring system to reward good flies eaten and take away score for bad flies
-maybe a time limit that goes up/down depending on the fly
+time system that sees how long u last
+if you miss a fly, rotation increases
 
 add fly movement to make the flies harder and add bad flies
 
