@@ -33,18 +33,20 @@ const frog = {
     // The frog's body has a position and size
     body: {
         x: 320,
-        y: 520,
+        y: 500,
         size: 150
+
     },
     // The frog's tongue has a position, size, speed, and state
+    rotation: 0,
     tongue: {
         x: undefined,
-        y: 480,
+        y: undefined,
         size: 20,
         speed: 20,
         // Determines how the tongue moves each frame
         state: "idle" // State can be: idle, outbound, inbound
-    }
+    },
 };
 
 // Our fly
@@ -109,10 +111,10 @@ function resetFly() {
 }
 
 /**
- * Moves the frog to the mouse position on x
+ * keeps the frog shacklcaed
  */
 function moveFrog() {
-    frog.body.x = mouseX;
+    frog.body.x = width / 2;
 }
 
 /**
@@ -147,6 +149,7 @@ function moveTongue() {
  * Displays the tongue (tip and line connection) and the frog (body)
  */
 function drawFrog() {
+
     // Draw the tongue tip
     push();
     fill("#ff0000");
@@ -161,11 +164,22 @@ function drawFrog() {
     line(frog.tongue.x, frog.tongue.y, frog.body.x, frog.body.y);
     pop();
 
+    push();
+    translate(frog.body.x, frog.body.y)
+    rotate(frog.rotation)
     // Draw the frog's body
     push();
     fill("#00ff00");
     noStroke();
-    ellipse(frog.body.x, frog.body.y, frog.body.size);
+    ellipse(0, 0, frog.body.size);
+    pop();
+    //draw frog mouth
+    push();
+    fill("#2f1528ff");
+    noStroke();
+    ellipse(0, - 60, frog.body.size - 120);
+    pop();
+
     pop();
 }
 
@@ -268,4 +282,13 @@ function runGame() {
     moveTongue();
     drawFrog();
     checkTongueFlyOverlap();
+
+    //rotates the frog depending on the key that is pressed 
+    if (keyIsDown(65)) {
+        frog.rotation -= .05
+    }
+    if (keyIsDown(68)) {
+        frog.rotation += .05
+    }
+    frog.rotation = constrain(frog.rotation, -PI / 3, PI / 3);
 }

@@ -1,6 +1,6 @@
- make the frog kind of physics based with rotation
+ make the frog kind of physics based with rotation 
 
-Add a title screen where the frogs eyes follow cursor and sound plays
+Add a title screen where the frogs eyes or tongue follow cursor and sound plays
 
 Add end screen to show score and show time 
 
