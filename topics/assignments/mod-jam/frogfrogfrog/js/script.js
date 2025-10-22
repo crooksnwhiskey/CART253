@@ -38,7 +38,7 @@ const frog = {
 
     },
     // The frog's tongue has a position, size, speed, and state
-    rotation: 0,
+    rotation: 0.01,//makes it not completely centered so it is affected by gravity
     tongue: {
         x: undefined,
         y: undefined,
@@ -75,6 +75,9 @@ function draw() {
     }
     else if (gameOn) {
         runGame();
+    }
+    else if (endScreen) {
+        drawEndScreen();
     }
 
 }
@@ -115,7 +118,7 @@ function resetFly() {
  * keeps the frog shacklcaed
  */
 function moveFrog() {
-    frog.body.x = width / 2;
+    frog.body.x = mouseX
 }
 
 /**
@@ -175,13 +178,30 @@ function drawFrog() {
     noStroke();
     ellipse(0, 0, frog.body.size);
     pop();
-    //draw frog mouth
+    //draw frog eyes
     push();
-    fill("#2f1528ff");
+    fill("#ffffffff");
     noStroke();
-    ellipse(0, - 60, frog.body.size - 120);
+    ellipse(10, - 60, frog.body.size - 130);
     pop();
 
+    push();
+    fill("#ffffffff");
+    noStroke();
+    ellipse(-10, - 60, frog.body.size - 130);
+    pop();
+
+    push();
+    fill("#000000ff");
+    noStroke();
+    ellipse(-10, - 65, frog.body.size - 140);
+    pop();
+
+    push();
+    fill("#000000ff");
+    noStroke();
+    ellipse(10, - 65, frog.body.size - 140);
+    pop();
     pop();
 }
 
@@ -284,13 +304,32 @@ function runGame() {
     moveTongue();
     drawFrog();
     checkTongueFlyOverlap();
+    rotateFrog();
 
+}
+/*
+takes care of the frog rotation mechanics
+*/function rotateFrog() {
+    if (frog.rotation >= 0) {
+        frog.rotation += 0.01
+    }
+    else {
+        frog.rotation -= 0.01
+    }
     //rotates the frog depending on the key that is pressed 
-    if (keyIsDown(65)) {
+    if (keyIsDown(65)) {// a key
         frog.rotation -= .05
     }
-    if (keyIsDown(68)) {
+    if (keyIsDown(68)) {//d key
         frog.rotation += .05
     }
     frog.rotation = constrain(frog.rotation, -PI / 3, PI / 3);
+
+    if (frog.rotation >= PI / 3 || frog.rotation <= -PI / 3) {// if rotation reaches a certain point, game ends
+        gameOn = false;
+        endScreen = true;
+    }
+}
+function drawEndScreen() {
+    background("red")
 }

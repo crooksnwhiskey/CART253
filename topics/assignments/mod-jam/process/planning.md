@@ -1,6 +1,6 @@
  make the frog have rotation controlled by keys.
  idk how to make the tongue sync.
-
+i give up on the tongue, new mechanic instead
 
 
 make the title page nicer
