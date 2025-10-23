@@ -14,7 +14,7 @@
  */
 
 "use strict";
-
+let score = 60;
 let titleScreen = true;
 let gameOn = false;
 let endScreen = false;
@@ -26,7 +26,12 @@ let startButton = {
     speed: 6
 
 };
-
+let retryButton = {
+    x: 300,
+    y: 400,
+    width: 200,
+    height: 100,
+};
 
 // Our frog
 const frog = {
@@ -64,7 +69,7 @@ const fly = {
 function setup() {
     createCanvas(640, 480);
     frog.tongue.y = frog.body.y - 60;
-
+    frameRate(60);
     // Give the fly its first random position
     resetFly();
 }
@@ -92,6 +97,7 @@ function moveFly() {
     // Handle the fly going off the canvas
     if (fly.x > width) {
         resetFly();
+        score -= 5// if fly reaches end, -5 score
     }
 }
 
@@ -115,7 +121,7 @@ function resetFly() {
 }
 
 /**
- * keeps the frog shacklcaed
+ * ahhh idk
  */
 function moveFrog() {
     frog.body.x = mouseX
@@ -216,19 +222,23 @@ function checkTongueFlyOverlap() {
     if (eaten) {
         // Reset the fly
         resetFly();
+        score += 3//if a fly is eaten, score goes up by three
         // Bring back the tongue
         frog.tongue.state = "inbound";
     }
 }
 
+
 /**
  * Launch the tongue on click (if it's not launched yet)
  * also makes the start button clickable
+ * also makes retry button work
  */
 function mousePressed() {
     if (frog.tongue.state === "idle") {
         frog.tongue.state = "outbound";
     }
+    //handles the start screen button interactivity
     if (titleScreen) {
         if (mouseX < startButton.x + startButton.width / 2 && mouseY < startButton.y + startButton.height / 2
             && mouseX > startButton.x - startButton.width / 2 && mouseY > startButton.y - startButton.height / 2
@@ -236,6 +246,12 @@ function mousePressed() {
             titleScreen = false;
             gameOn = true;
         }
+    }
+    if (endScreen) {
+        if (mouseX < retryButton.x + retryButton.width / 2 && mouseY < retryButton.y + retryButton.height / 2
+            && mouseX > retryButton.x - retryButton.width / 2 && mouseY > retryButton.y - retryButton.height / 2)
+            endScreen = false;
+        gameOn = true;
     }
 
 }
@@ -257,7 +273,7 @@ function drawTitleScreen() {
 /**draws interactive start button */
 function drawStartButton() {
     push();
-    rectMode(CENTER); //so useful, makes things relative to the senter of the rect
+    rectMode(CENTER); //so useful, makes things relative to the center of the rect/update...it confuses me alot lol
     strokeWeight(4);
     fill("#bff370ff");
     rect(startButton.x, startButton.y, startButton.width, startButton.height, 30);
@@ -305,6 +321,7 @@ function runGame() {
     drawFrog();
     checkTongueFlyOverlap();
     rotateFrog();
+    showScore();
 
 }
 /*
@@ -331,5 +348,47 @@ takes care of the frog rotation mechanics
     }
 }
 function drawEndScreen() {
-    background("red")
+    //draws end game text and background
+    push();
+    background("red");
+    textAlign(CENTER, CENTER);
+    textSize(100);
+    strokeWeight(5);
+    fill("#7d0000ff");
+    text("GAME OVER", width / 2, height / 2);
+    pop();
+
+    drawRetry();
+
+}
+/**
+ * draws the restart button
+ */
+function drawRetry() {
+    push();
+    rectMode(CENTER);
+    strokeWeight(4);
+    fill("#8a5b5bff");
+    rect(retryButton.x, retryButton.y, retryButton.width, retryButton.height, 30);
+    pop();
+    push();
+    fill("black");
+    textAlign(CENTER, CENTER);
+    textSize(30)
+    text("Try Again", retryButton.x, retryButton.y);
+    pop();
+}
+
+function showScore() {
+    if (gameOn === true) {
+        score -= deltaTime / 1000;
+        push();
+        textAlign(LEFT, TOP);
+        textSize(50);
+        text(score.toFixed(0), 10, 10);
+        pop();
+
+
+    }
+
 }
