@@ -372,6 +372,7 @@ function drawEndScreen() {
 
     drawRetry();
     drawTimer();
+    showScore();
 
 }
 /**
@@ -397,14 +398,25 @@ function showScore() {
         score -= deltaTime / 1000;
         push();
         textAlign(LEFT, TOP);
-        textSize(50);
-        text("health:" + score.toFixed(0), 10, 10);
+        textSize(30);
+        text("score:" + score.toFixed(0), 10, 10);
         pop();
-
-
+    }
+    if (score <= 0) {
+        gameOn = false;
+        endScreen = true;
+    }
+    else {
+        push();
+        textAlign(LEFT, TOP);
+        textSize(30);
+        text("score:" + score.toFixed(0), 10, 10);
+        pop();
     }
 
 }
+
+
 /**
  * draws the timer that counts up to keep track of how long you are playing
  */
