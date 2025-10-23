@@ -14,7 +14,8 @@
  */
 
 "use strict";
-let score = 60;
+let score = 100;
+let timer = 0;
 let titleScreen = true;
 let gameOn = false;
 let endScreen = false;
@@ -342,6 +343,7 @@ takes care of the frog rotation mechanics
     }
     else {
         frog.rotation -= 0.01
+
     }
     //rotates the frog depending on the key that is pressed 
     if (keyIsDown(65)) {// a key
@@ -369,6 +371,7 @@ function drawEndScreen() {
     pop();
 
     drawRetry();
+    drawTimer();
 
 }
 /**
@@ -402,14 +405,23 @@ function showScore() {
     }
 
 }
-let timer = 0;
+/**
+ * draws the timer that counts up to keep track of how long you are playing
+ */
 function drawTimer() {
     if (gameOn === true) {
         timer += deltaTime / 1000;
         push();
         textAlign(CENTER, TOP);
-        textSize(40);
+        textSize(30);
         text("time survived:" + timer.toFixed(1), 470, 10);
+        pop();
+    }
+    else {
+        push();
+        textAlign(CENTER, TOP);
+        textSize(30);
+        text("time survived:" + timer.toFixed(1) + "s", 470, 10);
         pop();
     }
 }
