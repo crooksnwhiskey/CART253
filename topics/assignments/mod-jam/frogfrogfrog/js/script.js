@@ -121,12 +121,16 @@ function resetFly() {
 }
 
 /**
- * ahhh idk
+ * moves the frog the opposite direction of your mouse with some acceleration and velocity
  */
 function moveFrog() {
-    frog.body.x = mouseX
+    if (mouseX < width / 2) {
+        frog.body.x += 2;
+    }
+    else {
+        frog.body.x -= 2;
+    }
 }
-
 /**
  * Handles moving the tongue based on its state
  */
@@ -268,7 +272,7 @@ function drawTitleScreen() {
     pop();
 
     drawStartButton();
-    moveStartButton();
+    //moveStartButton();
 }
 /**draws interactive start button */
 function drawStartButton() {
@@ -314,6 +318,12 @@ function moveStartButton() {
  */
 function runGame() {
     background("#87ceeb");
+    //drawas vertical line for cursor placement help.
+    push();
+    stroke("#75b2a7ff");
+    line(320, 480, 320, 0);
+    pop();
+
     moveFly();
     drawFly();
     moveFrog();
@@ -322,7 +332,7 @@ function runGame() {
     checkTongueFlyOverlap();
     rotateFrog();
     showScore();
-
+    drawTimer();
 }
 /*
 takes care of the frog rotation mechanics
@@ -385,10 +395,21 @@ function showScore() {
         push();
         textAlign(LEFT, TOP);
         textSize(50);
-        text(score.toFixed(0), 10, 10);
+        text("health:" + score.toFixed(0), 10, 10);
         pop();
 
 
     }
 
+}
+let timer = 0;
+function drawTimer() {
+    if (gameOn === true) {
+        timer += deltaTime / 1000;
+        push();
+        textAlign(CENTER, TOP);
+        textSize(40);
+        text("time survived:" + timer.toFixed(1), 470, 10);
+        pop();
+    }
 }
