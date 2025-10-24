@@ -14,7 +14,7 @@
  */
 
 "use strict";
-let score = 100;
+let score = 50;
 let timer = 0;
 let titleScreen = true;
 let gameOn = false;
@@ -118,7 +118,7 @@ function drawFly() {
  */
 function resetFly() {
     fly.x = 0;
-    fly.y = random(0, 300);
+    fly.y = random(10, 300);
 }
 
 /**
@@ -254,9 +254,11 @@ function mousePressed() {
     }
     if (endScreen) {
         if (mouseX < retryButton.x + retryButton.width / 2 && mouseY < retryButton.y + retryButton.height / 2
-            && mouseX > retryButton.x - retryButton.width / 2 && mouseY > retryButton.y - retryButton.height / 2)
+            && mouseX > retryButton.x - retryButton.width / 2 && mouseY > retryButton.y - retryButton.height / 2) {
             endScreen = false;
-        gameOn = true;
+            gameOn = true;
+            resetGame();
+        }
     }
 
 }
@@ -334,6 +336,7 @@ function runGame() {
     rotateFrog();
     showScore();
     drawTimer();
+    frogOverlap();
 }
 /*
 takes care of the frog rotation mechanics
@@ -436,4 +439,20 @@ function drawTimer() {
         text("time survived:" + timer.toFixed(1) + "s", 470, 10);
         pop();
     }
+}
+function frogOverlap() {
+    if (frog.body.x >= width || frog.body.x <= 0) {
+        gameOn = false;
+        endScreen = true;
+    }
+}
+function resetGame() {
+    score = 50;
+    timer = 0;
+    frog.body.x = width / 2;
+    frog.rotation = 0.01;
+    frog.tongue.state = "idle";
+    resetFly();
+    endScreen = false;
+    gameOn = true;
 }
