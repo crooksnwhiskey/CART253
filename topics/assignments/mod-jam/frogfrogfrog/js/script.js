@@ -19,6 +19,8 @@ let timer = 0;
 let titleScreen = true;
 let gameOn = false;
 let endScreen = false;
+let song;
+let flySound;
 let startButton = {
     x: 300,
     y: 300,
@@ -126,10 +128,10 @@ function resetFly() {
  */
 function moveFrog() {
     if (mouseX < width / 2) {
-        frog.body.x += 2;
+        frog.body.x += 3;
     }
     else {
-        frog.body.x -= 2;
+        frog.body.x -= 3;
     }
 }
 /**
@@ -230,6 +232,8 @@ function checkTongueFlyOverlap() {
         score += 3//if a fly is eaten, score goes up by three
         // Bring back the tongue
         frog.tongue.state = "inbound";
+        flySound.setVolume(2);
+        flySound.play();
     }
 }
 
@@ -275,7 +279,7 @@ function drawTitleScreen() {
     pop();
 
     drawStartButton();
-    //moveStartButton();
+    moveStartButton();
 }
 /**draws interactive start button */
 function drawStartButton() {
@@ -337,6 +341,7 @@ function runGame() {
     showScore();
     drawTimer();
     frogOverlap();
+    songPlaying();
 }
 /*
 takes care of the frog rotation mechanics
@@ -455,4 +460,23 @@ function resetGame() {
     resetFly();
     endScreen = false;
     gameOn = true;
+}
+function preload() {
+    song = loadSound("assets/sounds/gamefrog.wav");// song I made for this game
+    flySound = loadSound('assets/sounds/gamefrogfly.wav');//sound effect sampled from a chinese record
+
+}
+function songPlaying() {
+    if (gameOn === true || endScreen === true || titleScreen === true) {
+        if (!song.isPlaying()) {
+            song.loop();
+        }
+    }
+    if (gameOn === true) {
+        song.setVolume(1);
+    }
+    else if (endScreen === true) {
+        song.setVolume(0.3);
+
+    }
 }
