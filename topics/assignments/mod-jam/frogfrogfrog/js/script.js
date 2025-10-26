@@ -63,7 +63,7 @@ const fly = {
     x: 0,
     y: 200, // Will be random
     size: 10,
-    speed: 3
+    speed: undefined
 };
 
 /**
@@ -96,7 +96,10 @@ function draw() {
  */
 function moveFly() {
     // Move the fly
-    fly.x += fly.speed;
+    fly.x += random(1, 5);
+
+    fly.y = fly.y + sin(frameCount * random(0.1, 0.5)) * 7
+    fly.y = constrain(fly.y, 10, 310)
     // Handle the fly going off the canvas
     if (fly.x > width) {
         resetFly();
@@ -479,4 +482,19 @@ function songPlaying() {
         song.setVolume(0.3);
 
     }
+}
+function instructionPageRules() {
+    if (titleScreen === true && keyIsPressed(73)) {
+
+        drawInstructionPage();
+    }
+}
+function drawInstructionPage() {
+    push();
+    background("rgba(44, 103, 41, 1)");//sets background
+    textAlign(CENTER, CENTER);
+    textSize(10);
+    fill("#000000ff");
+    text("The goal of Phraug is to stay alive as long as possible while getting the highest score possible. ", width / 2, height / 8);
+    pop();
 }
