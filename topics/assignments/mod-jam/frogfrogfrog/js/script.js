@@ -17,6 +17,7 @@
 let score = 50;
 let timer = 0;
 let titleScreen = true;
+let instructionScreen = false;
 let gameOn = false;
 let endScreen = false;
 let song;
@@ -33,7 +34,19 @@ let retryButton = {
     x: 300,
     y: 400,
     width: 200,
-    height: 100,
+    height: 100
+};
+let instructionButton = {
+    x: 570,
+    y: 60,
+    width: 90,
+    height: 50
+};
+let backButton = {
+    x: 570,
+    y: 60,
+    width: 90,
+    height: 50
 };
 
 // Our frog
@@ -78,7 +91,11 @@ function setup() {
 }
 
 function draw() {
-    if (titleScreen) {
+    if (instructionScreen) {
+        drawInstructionPage();
+
+    }
+    else if (titleScreen) {
         drawTitleScreen();
     }
     else if (gameOn) {
@@ -247,19 +264,38 @@ function checkTongueFlyOverlap() {
  * also makes retry button work
  */
 function mousePressed() {
-    if (frog.tongue.state === "idle") {
+    if (gameOn && frog.tongue.state === "idle") {
         frog.tongue.state = "outbound";
     }
-    //handles the start screen button interactivity
-    if (titleScreen) {
+    //handles all screen button interactivity
+    else if (instructionScreen) {
+        if (mouseX < backButton.x + backButton.width / 2 && mouseY < backButton.y + backButton.height / 2
+            && mouseX > backButton.x - backButton.width / 2 && mouseY > backButton.y - backButton.height / 2
+        ) {
+            instructionScreen = false;
+            titleScreen = true;
+            gameOn = false;
+
+        }
+    }
+    else if (titleScreen) {
         if (mouseX < startButton.x + startButton.width / 2 && mouseY < startButton.y + startButton.height / 2
             && mouseX > startButton.x - startButton.width / 2 && mouseY > startButton.y - startButton.height / 2
         ) {
             titleScreen = false;
             gameOn = true;
         }
+        else if (mouseX < instructionButton.x + instructionButton.width / 2 && mouseY < instructionButton.y + instructionButton.height / 2
+            && mouseX > instructionButton.x - instructionButton.width / 2 && mouseY > instructionButton.y - instructionButton.height / 2
+        ) {
+            titleScreen = false;
+            instructionScreen = true;
+            gameOn = false;
+        }
+
     }
-    if (endScreen) {
+
+    else if (endScreen) {
         if (mouseX < retryButton.x + retryButton.width / 2 && mouseY < retryButton.y + retryButton.height / 2
             && mouseX > retryButton.x - retryButton.width / 2 && mouseY > retryButton.y - retryButton.height / 2) {
             endScreen = false;
@@ -269,6 +305,7 @@ function mousePressed() {
     }
 
 }
+
 /**
  * adds a title screen to the game
  */
@@ -278,10 +315,13 @@ function drawTitleScreen() {
     textAlign(CENTER, CENTER);
     textSize(50);
     fill("#bff370ff");
+    stroke(0);
+    strokeWeight(8);
     text("Phraug", width / 2, height / 8);
     pop();
 
     drawStartButton();
+    drawInstructionPageButton();
     moveStartButton();
 }
 /**draws interactive start button */
@@ -320,7 +360,7 @@ function moveStartButton() {
         }
 
         startButton.x = constrain(startButton.x, startButton.width / 2, width - startButton.width / 2);
-        startButton.y = constrain(startButton.y, startButton.height / 2, height - startButton.height / 2);
+        startButton.y = constrain(startButton.y, startButton.height / 0.7, height - startButton.height / 2);
     }
 }
 /**
@@ -466,7 +506,7 @@ function resetGame() {
 }
 function preload() {
     song = loadSound("assets/sounds/gamefrog.wav");// song I made for this game
-    flySound = loadSound('assets/sounds/gamefrogfly.wav');//sound effect sampled from a chinese record
+    flySound = loadSound('assets/sounds/gamefrogfly.wav');//sound effect sampled and altered from a chinese record
 
 }
 function songPlaying() {
@@ -483,18 +523,59 @@ function songPlaying() {
 
     }
 }
-function instructionPageRules() {
-    if (titleScreen === true && keyIsPressed(73)) {
+function drawInstructionPageButton() {
 
-        drawInstructionPage();
-    }
+    push();
+    rectMode(CENTER);
+    strokeWeight(4);
+    fill("#bff370ff");
+    rect(instructionButton.x, instructionButton.y, instructionButton.width, instructionButton.height, 10);
+    pop();
+    push();
+    fill("black");
+    textAlign(CENTER, CENTER);
+    textSize(10);
+    text("INSTRUCTIONS", instructionButton.x, instructionButton.y);
+    pop();
+
 }
 function drawInstructionPage() {
     push();
     background("rgba(44, 103, 41, 1)");//sets background
     textAlign(CENTER, CENTER);
-    textSize(10);
+    textSize(15);
     fill("#000000ff");
-    text("The goal of Phraug is to stay alive as long as possible while getting the highest score possible. ", width / 2, height / 8);
+    text("The goal of Phraug is to stay alive as long as possible while getting the highest score possible. ", width / 2, height - 370);
+    text("Click your mouse button to extend tongue and try to catch flies. ", width / 2, height - 350);
+    text("There are 3 ways to die in this game:", width / 2, height - 300);
+    text("First, if you let your eyes (controlled with a & d) touch the ground, you die.", width / 2, height - 250);
+    text("Second, if the frog touches the edges of the screen, you die.", width / 2, height - 200);
+    text("To move the frog, place your cursor on either the left of the screen to go right, ", width / 2, height - 180);
+    text("or place your cursor on the right side of the screen to go left", width / 2, height - 160);
+    text("Third, if your score reaches 0, you die.", width / 2, height - 110);
+    text("Your score is always going down, BUT:", width / 2, height - 90);
+    text("if you catch a fly, your score goes up, if you let a fly reach the end, your score goes down.", width / 2, height - 40);
+
+
+
+
     pop();
+    drawBackButton();
+
+
+} function drawBackButton() {
+
+    push();
+    rectMode(CENTER);
+    strokeWeight(4);
+    fill("#bff370ff");
+    rect(backButton.x, backButton.y, backButton.width, backButton.height, 10);
+    pop();
+    push();
+    fill("black");
+    textAlign(CENTER, CENTER);
+    textSize(10);
+    text("BACK", backButton.x, backButton.y);
+    pop();
+
 }
