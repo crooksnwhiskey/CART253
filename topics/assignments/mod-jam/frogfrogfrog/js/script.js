@@ -14,6 +14,8 @@
  */
 
 "use strict";
+const particles = [];
+let font;
 let score = 50;
 let timer = 0;
 let titleScreen = true;
@@ -88,8 +90,17 @@ function setup() {
     frameRate(60);
     // Give the fly its first random position
     resetFly();
+    //counts to 10000
+    for (let i = 0; i < 10000; i++) {
+        //creates particles
+        const particle = createParticles();
+        //adds to empty array
+        particles.push(particle);
+    }
 }
-
+/**
+ * handles the game state
+ */
 function draw() {
     if (instructionScreen) {
         drawInstructionPage();
@@ -108,15 +119,15 @@ function draw() {
 }
 
 /**
- * Moves the fly according to its speed
+ * Moves the fly 
  * Resets the fly if it gets all the way to the right
  */
 function moveFly() {
-    // Move the fly
+    // Moves the fly at a random pace to the right
     fly.x += random(1, 5);
-
+    //moves fly up and down erraticly
     fly.y = fly.y + sin(frameCount * random(0.1, 0.5)) * 7
-    fly.y = constrain(fly.y, 10, 310)
+    fly.y = constrain(fly.y, 10, 310);
     // Handle the fly going off the canvas
     if (fly.x > width) {
         resetFly();
@@ -144,7 +155,7 @@ function resetFly() {
 }
 
 /**
- * moves the frog the opposite direction of your mouse with some acceleration and velocity
+ * moves the frog the opposite direction of your mouse
  */
 function moveFrog() {
     if (mouseX < width / 2) {
@@ -190,14 +201,14 @@ function drawFrog() {
 
     // Draw the tongue tip
     push();
-    fill("#ff0000");
+    fill("#8d5d5dff");
     noStroke();
     ellipse(frog.tongue.x, frog.tongue.y, frog.tongue.size);
     pop();
 
     // Draw the rest of the tongue
     push();
-    stroke("#ff0000");
+    stroke("#bd7676ff");
     strokeWeight(frog.tongue.size);
     line(frog.tongue.x, frog.tongue.y, frog.body.x, frog.body.y);
     pop();
@@ -207,7 +218,7 @@ function drawFrog() {
     rotate(frog.rotation)
     // Draw the frog's body
     push();
-    fill("#00ff00");
+    fill("#2f5c2fff");
     noStroke();
     ellipse(0, 0, frog.body.size);
     pop();
@@ -260,8 +271,7 @@ function checkTongueFlyOverlap() {
 
 /**
  * Launch the tongue on click (if it's not launched yet)
- * also makes the start button clickable
- * also makes retry button work
+ * also makes all the buttons work
  */
 function mousePressed() {
     if (gameOn && frog.tongue.state === "idle") {
@@ -311,18 +321,24 @@ function mousePressed() {
  */
 function drawTitleScreen() {
     push();
-    background("rgba(44, 103, 41, 1)");//sets background
+    background("rgba(149, 181, 246, 1)");//sets background
+    for (const particle of particles) {
+        moveParticle(particle);
+        drawParticlesStart(particle)
+    }
     textAlign(CENTER, CENTER);
     textSize(50);
     fill("#bff370ff");
     stroke(0);
     strokeWeight(8);
+    textFont(font);
     text("Phraug", width / 2, height / 8);
     pop();
 
     drawStartButton();
     drawInstructionPageButton();
     moveStartButton();
+
 }
 /**draws interactive start button */
 function drawStartButton() {
@@ -335,9 +351,12 @@ function drawStartButton() {
     push();
     fill("black");
     textAlign(CENTER, CENTER);
-    textSize(30)
+    textSize(30);
+    textFont(font);
     text("START", startButton.x, startButton.y);
     pop();
+
+
 }
 /** 
  * controls the start button running away from cursor
@@ -367,8 +386,8 @@ function moveStartButton() {
  * draws the entire gameplay
  */
 function runGame() {
-    background("#87ceeb");
-    //drawas vertical line for cursor placement help.
+    background("#a8cbd9ff");
+    //draws vertical line for cursor placement help.
     push();
     stroke("#75b2a7ff");
     line(320, 480, 320, 0);
@@ -387,7 +406,7 @@ function runGame() {
     songPlaying();
 }
 /*
-takes care of the frog rotation mechanics
+takes care of the frog eye rotation mechanics
 */function rotateFrog() {
     if (frog.rotation >= 0) {
         frog.rotation += 0.01
@@ -410,14 +429,23 @@ takes care of the frog rotation mechanics
         endScreen = true;
     }
 }
+/**
+ * draws the endscreen
+ */
 function drawEndScreen() {
     //draws end game text and background
     push();
-    background("red");
+    background("#ff6745ff");
+    for (const particle of particles) {
+        moveParticle(particle);
+        drawParticlesEnd(particle)
+    }
     textAlign(CENTER, CENTER);
-    textSize(100);
+    textSize(50);
     strokeWeight(5);
     fill("#7d0000ff");
+    stroke(4)
+    textFont(font);
     text("GAME OVER", width / 2, height / 2);
     pop();
 
@@ -433,23 +461,27 @@ function drawRetry() {
     push();
     rectMode(CENTER);
     strokeWeight(4);
-    fill("#8a5b5bff");
+    fill("#ff0000ff");
     rect(retryButton.x, retryButton.y, retryButton.width, retryButton.height, 30);
     pop();
     push();
     fill("black");
     textAlign(CENTER, CENTER);
-    textSize(30)
+    textSize(20);
+    textFont(font);
     text("Try Again", retryButton.x, retryButton.y);
     pop();
 }
-
+/**
+ * displays the score on the endscreen and game
+ */
 function showScore() {
     if (gameOn === true) {
         score -= deltaTime / 1000;
         push();
         textAlign(LEFT, TOP);
-        textSize(30);
+        textSize(15);
+        textFont(font);
         text("score:" + score.toFixed(0), 10, 10);
         pop();
     }
@@ -460,7 +492,8 @@ function showScore() {
     else {
         push();
         textAlign(LEFT, TOP);
-        textSize(30);
+        textSize(15);
+        textFont(font);
         text("score:" + score.toFixed(0), 10, 10);
         pop();
     }
@@ -476,24 +509,32 @@ function drawTimer() {
         timer += deltaTime / 1000;
         push();
         textAlign(CENTER, TOP);
-        textSize(30);
+        textSize(15);
+        textFont(font);
         text("time survived:" + timer.toFixed(1), 470, 10);
         pop();
     }
     else {
         push();
         textAlign(CENTER, TOP);
-        textSize(30);
+        textSize(15);
+        textFont(font);
         text("time survived:" + timer.toFixed(1) + "s", 470, 10);
         pop();
     }
 }
+/**
+ * if the frog touches the edges of the canvas, the game ends
+ */
 function frogOverlap() {
     if (frog.body.x >= width || frog.body.x <= 0) {
         gameOn = false;
         endScreen = true;
     }
 }
+/**
+ * resets the game state if you press retry
+ */
 function resetGame() {
     score = 50;
     timer = 0;
@@ -504,11 +545,18 @@ function resetGame() {
     endScreen = false;
     gameOn = true;
 }
+/**
+ * loads assets
+ */
 function preload() {
     song = loadSound("assets/sounds/gamefrog.wav");// song I made for this game
     flySound = loadSound('assets/sounds/gamefrogfly.wav');//sound effect sampled and altered from a chinese record
+    font = loadFont('assets/fonts/PressStart2p-Regular.ttf')//font from google fonts
 
 }
+/**
+ * controls when the song plays
+ */
 function songPlaying() {
     if (gameOn === true || endScreen === true || titleScreen === true) {
         if (!song.isPlaying()) {
@@ -523,6 +571,9 @@ function songPlaying() {
 
     }
 }
+/**
+ * draws the instruction page button on title screen
+ */
 function drawInstructionPageButton() {
 
     push();
@@ -534,16 +585,21 @@ function drawInstructionPageButton() {
     push();
     fill("black");
     textAlign(CENTER, CENTER);
-    textSize(10);
+    textSize(7);
+    textFont(font);
     text("INSTRUCTIONS", instructionButton.x, instructionButton.y);
     pop();
 
 }
+/**
+ * draws the text on the instruction screen and the back button
+ */
 function drawInstructionPage() {
     push();
     background("rgba(44, 103, 41, 1)");//sets background
     textAlign(CENTER, CENTER);
-    textSize(15);
+    textSize(6);
+    textFont(font);
     fill("#000000ff");
     text("The goal of Phraug is to stay alive as long as possible while getting the highest score possible. ", width / 2, height - 370);
     text("Click your mouse button to extend tongue and try to catch flies. ", width / 2, height - 350);
@@ -556,14 +612,15 @@ function drawInstructionPage() {
     text("Your score is always going down, BUT:", width / 2, height - 90);
     text("if you catch a fly, your score goes up, if you let a fly reach the end, your score goes down.", width / 2, height - 40);
 
-
-
-
     pop();
     drawBackButton();
 
 
-} function drawBackButton() {
+}
+/**
+ * draws the back button
+ */
+function drawBackButton() {
 
     push();
     rectMode(CENTER);
@@ -575,7 +632,53 @@ function drawInstructionPage() {
     fill("black");
     textAlign(CENTER, CENTER);
     textSize(10);
+    textFont(font);
     text("BACK", backButton.x, backButton.y);
+    pop();
+
+}
+function createParticles() {
+    const oneParticle = {
+        x: random(0, width),
+        y: random(0, height),
+        size: random(20, 50),
+        velocity: {
+            x: random(0.5, -0.5),
+            y: random(0.5, -0.5)
+        }
+    };
+    return oneParticle;
+}
+function moveParticle(particle) {
+    particle.x += particle.velocity.x;
+    particle.y += particle.velocity.y;
+    //wrap if needed
+    if (particle.x < 0) {
+        particle.x = width;
+    }
+    else if (particle.x > width) {
+        particle.x = 0;
+    }
+    if (particle.y < 0) {
+        particle.y = height;
+    }
+    else if (particle.y > height) {
+        particle.y = 0;
+    }
+}
+function drawParticlesStart(particle) {
+    push();
+    fill(30, 30, 100, 23);
+    noStroke();
+    ellipse(particle.x, particle.y, particle.size);
+    pop();
+
+}
+function drawParticlesEnd(particle) {
+    push();
+    fill(100, 10, 10, 23);
+    noStroke();
+    ellipse(particle.x, particle.y, particle.size);
     pop();
 
 }
