@@ -637,6 +637,9 @@ function drawBackButton() {
     pop();
 
 }
+/**
+ * draws one particle
+ */
 function createParticles() {
     const oneParticle = {
         x: random(0, width),
@@ -649,6 +652,9 @@ function createParticles() {
     };
     return oneParticle;
 }
+/**
+ * moves the aformentioned particle
+ */
 function moveParticle(particle) {
     particle.x += particle.velocity.x;
     particle.y += particle.velocity.y;
@@ -666,6 +672,9 @@ function moveParticle(particle) {
         particle.y = 0;
     }
 }
+/**
+ * this is so I can change the colour of the particles on the start screen
+ */
 function drawParticlesStart(particle) {
     push();
     fill(30, 30, 100, 23);
@@ -674,6 +683,9 @@ function drawParticlesStart(particle) {
     pop();
 
 }
+/**
+ * this is so I can change the colour of the particles on the end screen
+ */
 function drawParticlesEnd(particle) {
     push();
     fill(100, 10, 10, 23);
