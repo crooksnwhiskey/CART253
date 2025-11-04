@@ -559,7 +559,7 @@ function resetGame() {
 function preload() {
     song = loadSound("assets/sounds/gamefrog.wav");// song I made for this game
     flySound = loadSound('assets/sounds/gamefrogfly.wav');//sound effect sampled and altered from a chinese record
-    font = loadFont('assets/fonts/PressStart2p-Regular.ttf')//font from google fonts
+    font = loadFont("assets/fonts/PressStart2P-Regular.ttf")//font from google fonts
 
 }
 /**
