@@ -29,13 +29,13 @@ function draw() {
     let height = random(1, 500);
     while (x <= width) {
         stroke(random(0, 255));
-        line(x, 0, 0, height);
+        line(x, 0, x, height);
         x += random(1, 5);
     }
     let y = 0;
     while (y <= height) {
         stroke(random(0, 255));
-        line(0, y, width, 0);
+        line(0, y, width, y);
         y += random(1, 5);
     }
 }
