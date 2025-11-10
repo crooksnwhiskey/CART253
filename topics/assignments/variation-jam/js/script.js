@@ -27,14 +27,14 @@ function draw() {
         case "menu":
             menuDraw();
             break;
-        case "red-variation":
-            redDraw();
+        case "original":
+            originalDraw();
             break
         case "green-variation":
             greenDraw();
             break;
-        case "blue-variation":
-            blueDraw();
+        case "movement":
+            movementDraw();
             break;
     }
 }
@@ -48,14 +48,14 @@ function mousePressed() {
         case "menu":
             menuMousePressed();
             break;
-        case "red-variation":
-            redMousePressed();
+        case "original":
+            originalMousePressed();
             break
         case "green-variation":
             greenMousePressed();
             break;
-        case "blue-variation":
-            blueMousePressed();
+        case "movement":
+            movementMousePressed();
             break;
     }
 }
@@ -69,14 +69,14 @@ function keyPressed(event) {
         case "menu":
             menuKeyPressed(event);
             break;
-        case "red-variation":
-            redKeyPressed(event);
+        case "original":
+            originalKeyPressed(event);
             break
         case "green-variation":
             greenKeyPressed(event);
             break;
-        case "blue-variation":
-            blueKeyPressed(event);
+        case "movement":
+            movementKeyPressed(event);
             break;
     }
 }
