@@ -552,7 +552,7 @@ function resetGame() {
     resetFly();
     endScreen = false;
     gameOn = true;
-}
+} a
 /**
  * loads assets
  */

@@ -7,12 +7,11 @@
 /**
  * This will be called just before the movement variation starts
  */
-let movementBallx;
-let movementBally;
-const movementBall = {
-    x: 320,
-    y: 240,
-    size: 100,
+
+let movementBall = {
+    x: undefined,
+    y: undefined,
+    size: 70,
     speed: undefined,
     fill: "#ffffffff",
     fills: {
@@ -27,6 +26,8 @@ let movementOverlap = false;
 
 function movementSetup() {
     createCanvas(640, 480);
+    movementBall.x = width / 2;
+    movementBall.y = height / 2;
 
 }
 
@@ -35,6 +36,9 @@ function movementSetup() {
  */
 function movementDraw() {
     background("#8a6b8aff");
+
+
+
 
     const d = dist(mouseX, mouseY, movementBall.x, movementBall.y);//checks distance between mouse and ball
     movementOverlap = d < movementBall.size / 2;
@@ -45,9 +49,12 @@ function movementDraw() {
     else {
         movementBall.fill = movementBall.fills.noOverlap
     }
+
     movementDrawBall();
     movementShowScore();
     movementBallMove();
+
+
 }
 
 /**
@@ -70,6 +77,8 @@ function movementDrawBall() {
     fill(movementBall.fill);
     ellipse(movementBall.x, movementBall.y, movementBall.size);
     pop();
+
+
 }
 function movementShowScore() {
     push();
@@ -82,12 +91,19 @@ function movementShowScore() {
     }
 
 }
+
 function movementBallMove() {
-    movementBall.x += random(1, 5);
+    let noiseLevel = 100000;
+    let noiseScale = 0.007;
 
-    movementBall.y += sin(60);
+    let nt = noiseScale * frameCount;
 
-    if (movementBall.x / 2 > width) {
-        movementBall.x -= random(1, 5);
-    }
+    movementBall.x = width * noise(nt);
+    movementBall.y = height * noise(nt + 1000);
+
+    movementBall.x = constrain(movementBall.x, movementBall.size / 2, width - movementBall.size / 2);
+    movementBall.y = constrain(movementBall.y, movementBall.size / 2, height - movementBall.size / 2);
+
 }
+
+
