@@ -91,7 +91,9 @@ function movementShowScore() {
     }
 
 }
-
+/**
+ * controls the smooth movement of the ball with noise
+ */
 function movementBallMove() {
     let noiseLevel = 100000;
     let noiseScale = 0.007;

@@ -1,5 +1,4 @@
 ###Starry sky with movement... ask about pulse speed and flow field
-
 let particles = [];
 const num = 90;
 
@@ -7,7 +6,12 @@ function setup() {
   createCanvas(400, 400);
   
   for (let i = 0; i < num; i ++){
-    particles.push(createVector(random(width),random(height)));
+    const particle = {
+      x: random(width),
+      y: random(height),
+      size: random(0,3)
+    }
+    particles.push(particle);
   }
 }
 
@@ -22,16 +26,20 @@ function draw() {
 function drawParticle(particle){
   
   stroke("rgb(255,253,187)");
-  ellipse(particle.x,particle.y,(random(0,3)));
+  ellipse(particle.x,particle.y,particle.size);
   
 
 }
 function updateParticle(particle) {
+  if(random()<0.2)
+
+     {
+     particle.size = random(0,3);}
   particle.x -= 1;
   // Wrap if needed
   if (particle.x < 0) {
     particle.x = width;
-    particle.y = height;
+    particle.y = random(height);
   }
   else if (particle.x > width) {
     particle.x = 0;
@@ -43,6 +51,7 @@ function updateParticle(particle) {
     particle.y = 0;
   }
 }
+
 
 
 
@@ -98,3 +107,12 @@ function updateParticle(particle) {
     particle.y = 0;
   }
 }
+
+
+
+
+ideas for versions:
+
+shrinking+growing circle(if it gets too small or too big game over)
+red light green light
+avoid the circle
