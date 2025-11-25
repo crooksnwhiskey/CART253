@@ -6,7 +6,7 @@
 
 const menuText = `
 (R) original variation
-(G) Green variation
+(G) starwars variation
 (B) movement variation`
 
 /**
@@ -34,8 +34,8 @@ function menuKeyPressed(event) {
             break;
 
         case 71:
-            state = "green-variation";
-            greenSetup();
+            state = "starwars";
+            starwarsSetup();
             break;
 
         case 66:

@@ -30,8 +30,8 @@ function draw() {
         case "original":
             originalDraw();
             break
-        case "green-variation":
-            greenDraw();
+        case "starwars":
+            starwarsDraw();
             break;
         case "movement":
             movementDraw();
@@ -51,8 +51,8 @@ function mousePressed() {
         case "original":
             originalMousePressed();
             break
-        case "green-variation":
-            greenMousePressed();
+        case "starwars-variation":
+            starwarsMousePressed();
             break;
         case "movement":
             movementMousePressed();
@@ -72,8 +72,8 @@ function keyPressed(event) {
         case "original":
             originalKeyPressed(event);
             break
-        case "green-variation":
-            greenKeyPressed(event);
+        case "starwars-variation":
+            starwarsKeyPressed(event);
             break;
         case "movement":
             movementKeyPressed(event);
