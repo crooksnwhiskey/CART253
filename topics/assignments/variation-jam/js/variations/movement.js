@@ -101,7 +101,7 @@ function movementBallMove() {
     let nt = noiseScale * frameCount;
 
     movementBall.x = width * noise(nt);
-    movementBall.y = height * noise(nt + 1000);
+    movementBall.y = height * noise(nt + 10000);
 
     movementBall.x = constrain(movementBall.x, movementBall.size / 2, width - movementBall.size / 2);
     movementBall.y = constrain(movementBall.y, movementBall.size / 2, height - movementBall.size / 2);

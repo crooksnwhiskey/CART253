@@ -17,8 +17,17 @@ let ship = {
     x: 30,
     y: 200,
     size: 100,
+    height: 20,
+    width: 40,
     speed: 3
-}
+};
+let weakspot = {
+    offsetX: -10,
+    offsetY: 30,
+    width: 20,
+    height: 10
+
+};
 const num = 20;
 
 function starwarsSetup() {
@@ -38,6 +47,7 @@ function starwarsDraw() {
     background(22);
     starwarsDrawShip();
     starwarsMoveShip();
+    starwarsDrawWeakspot();
 
 
     for (let i = 0; i < num; i++) {
@@ -72,6 +82,7 @@ function starwarsUpdateParticle(particle) {
     else if (particle.y > height) {
         particle.y = 0;
     }
+
 }
 
 
@@ -92,10 +103,15 @@ function starwarsMousePressed() {
 
 function starwarsDrawShip() {
     push();
-    strokeWeight(2);
-    stroke(0)
-    fill("#4a4a4cff");
+    noStroke();
+    fill("#737373ff");
     ellipse(ship.x, ship.y, ship.size);
+    pop();
+
+    push();
+    noStroke();
+    fill("#737373ff");
+    rect(ship.x, ship.y, ship.width, ship.height);
     pop();
 
 }
@@ -112,4 +128,11 @@ function starwarsMoveShip() {
     if (keyIsDown(68)) {
         ship.x += ship.speed
     }
+}
+function starwarsDrawWeakspot() {
+    push();
+    fill("black");
+    noStroke()
+    rect(ship.x + weakspot.offsetX, ship.y + weakspot.offsetY, weakspot.width, weakspot.height)
+    pop();
 }
