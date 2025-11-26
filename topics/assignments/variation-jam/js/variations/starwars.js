@@ -28,6 +28,8 @@ let weakspot = {
     height: 10
 
 };
+
+
 const num = 20;
 
 function starwarsSetup() {
@@ -54,6 +56,7 @@ function starwarsDraw() {
         let particle = particles[i];
         starwarsDrawParticle(particle);
         starwarsUpdateParticle(particle);
+        starwarsCheckOverlap(particle);
     }
 }
 function starwarsDrawParticle(particle) {
@@ -96,7 +99,7 @@ function starwarsKeyPressed(event) {
 
 /**
  * This will be called whenever the mouse is pressed while the starwars variation is active 
- */
+*/
 function starwarsMousePressed() {
 
 }
@@ -135,4 +138,19 @@ function starwarsDrawWeakspot() {
     noStroke()
     rect(ship.x + weakspot.offsetX, ship.y + weakspot.offsetY, weakspot.width, weakspot.height)
     pop();
+}
+/**
+ * Handles the weakspot overlapping the fly
+*/
+function starwarsCheckOverlap(particle) {
+
+    const weakspotX = ship.x + weakspot.offsetX;
+    const weakspotY = ship.y + weakspot.offsetY;
+    // Get distance from star to weakspot
+    const d = dist(weakspotX, weakspotY, particle.x, particle.y);
+    // Check if it's an overlap
+    const damage = (d < weakspot.width / 2 + particle.size / 2);
+    if (damage) {
+        console.log("hello");
+    }
 }
