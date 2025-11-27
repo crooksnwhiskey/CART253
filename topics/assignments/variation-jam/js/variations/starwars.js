@@ -22,10 +22,9 @@ let ship = {
     speed: 3
 };
 let weakspot = {
-    offsetX: -10,
+    offsetX: 0,
     offsetY: 30,
-    width: 20,
-    height: 10
+    size: 20
 
 };
 
@@ -46,7 +45,7 @@ function starwarsSetup() {
 }
 
 function starwarsDraw() {
-    background(22);
+    background(22, 25);
     starwarsDrawShip();
     starwarsMoveShip();
     starwarsDrawWeakspot();
@@ -61,7 +60,7 @@ function starwarsDraw() {
 }
 function starwarsDrawParticle(particle) {
 
-    stroke("rgb(255,253,187)");
+    stroke("rgba(111, 255, 0, 1)");
     ellipse(particle.x, particle.y, particle.size);
 
 
@@ -134,9 +133,9 @@ function starwarsMoveShip() {
 }
 function starwarsDrawWeakspot() {
     push();
-    fill("black");
-    noStroke()
-    rect(ship.x + weakspot.offsetX, ship.y + weakspot.offsetY, weakspot.width, weakspot.height)
+    fill("#4a4a4aff");
+    noStroke();
+    ellipse(ship.x + weakspot.offsetX, ship.y + weakspot.offsetY, 10);
     pop();
 }
 /**
@@ -149,8 +148,13 @@ function starwarsCheckOverlap(particle) {
     // Get distance from star to weakspot
     const d = dist(weakspotX, weakspotY, particle.x, particle.y);
     // Check if it's an overlap
-    const damage = (d < weakspot.width / 2 + particle.size / 2);
+    const damage = (d < weakspot.size / 2 + particle.size / 2);
     if (damage) {
-        console.log("hello");
+        starReset(particle);
     }
 }
+function starReset(particle) {
+    particle.x = width
+    particle.y = random(height);
+
+} w
