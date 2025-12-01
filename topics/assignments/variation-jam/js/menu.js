@@ -5,9 +5,11 @@
  */
 
 const menuText = `
-(R) original variation
-(G) starwars variation
-(B) movement variation`
+(1) original variation
+(2) starwars variation
+(3) movement variation
+(4) avoid variation
+`
 
 /**
  * Display the main menu
@@ -28,19 +30,24 @@ function menuDraw() {
  */
 function menuKeyPressed(event) {
     switch (event.keyCode) {
-        case 82:
+        case 49:
             state = "original";
             originalSetup();
             break;
 
-        case 71:
+        case 50:
             state = "starwars";
             starwarsSetup();
             break;
 
-        case 66:
+        case 51:
             state = "movement";
             movementSetup();
+            break;
+
+        case 52:
+            state = "avoid";
+            avoidSetup();
             break;
     }
 }

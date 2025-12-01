@@ -36,6 +36,9 @@ function draw() {
         case "movement":
             movementDraw();
             break;
+        case "avoid":
+            avoidDraw();
+            break;
     }
 }
 
@@ -57,6 +60,9 @@ function mousePressed() {
         case "movement":
             movementMousePressed();
             break;
+        case "movement":
+            avoidMousePressed();
+            break;
     }
 }
 
@@ -77,6 +83,9 @@ function keyPressed(event) {
             break;
         case "movement":
             movementKeyPressed(event);
+            break;
+        case "movement":
+            avoidKeyPressed(event);
             break;
     }
 }

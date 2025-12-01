@@ -27,11 +27,22 @@ let weakspot = {
     size: 20
 
 };
+let lives = 3;
 
+let starwarsState = "gameOn";
 
 const num = 20;
 
+function starwarsGameStates() {
+
+    if (starwarsState === "end") {
+        starwarsDrawEndscreen();
+    }
+
+}
+
 function starwarsSetup() {
+
     createCanvas(400, 400);
 
     for (let i = 0; i < num; i++) {
@@ -45,10 +56,17 @@ function starwarsSetup() {
 }
 
 function starwarsDraw() {
+
+    if (starwarsState === "end") {
+        starwarsDrawEndscreen();
+        return;
+
+    }
     background(22, 25);
     starwarsDrawShip();
     starwarsMoveShip();
     starwarsDrawWeakspot();
+    starwarsGameStates();
 
 
     for (let i = 0; i < num; i++) {
@@ -57,6 +75,7 @@ function starwarsDraw() {
         starwarsUpdateParticle(particle);
         starwarsCheckOverlap(particle);
     }
+    text("Lives left: " + lives, 10, 20);
 }
 function starwarsDrawParticle(particle) {
 
@@ -151,10 +170,29 @@ function starwarsCheckOverlap(particle) {
     const damage = (d < weakspot.size / 2 + particle.size / 2);
     if (damage) {
         starReset(particle);
+        lives = lives - 1
+    }
+    if (lives <= 0) {
+        starwarsState = "end"
     }
 }
 function starReset(particle) {
     particle.x = width
     particle.y = random(height);
 
-} w
+}
+function starwarsDrawEndscreen() {
+
+    background("rgba(0, 0, 0, 0.73)");
+    push();
+    textAlign(CENTER, CENTER);
+    textSize(40)
+    text("GAME OVER", width / 2, height / 2);
+    pop();
+
+    push();
+    textAlign(CENTER, CENTER);
+    textSize(20)
+    text("Refresh to Restart", width / 2, 300);
+    pop();
+}
