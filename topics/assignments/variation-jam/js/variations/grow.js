@@ -9,23 +9,28 @@
  */
 let growBallx;
 let growBally;
+let growState = "gameOn";
 const growBall = {
     x: 320,
-    y: 240,
-    size: 100,
-    fill: "#ffffffff",
-    fills: {
-        noOverlap: "#fefffbff",
-        overlap: "#a4a4a3ff"
-    }
+    y: 320,
+    size: 200,
+    fill: 200,
 };
 
 let growScore = 0;
 let growOverlap = false;
 
+function growGameStates() {
+
+    if (growState === "end") {
+        growDrawEndscreen();
+        return;
+    }
+
+}
 
 function growSetup() {
-    createCanvas(640, 480);
+    createCanvas(640, 640);
 
 }
 
@@ -33,18 +38,25 @@ function growSetup() {
  * This will be called every frame when the grow variation is active
  */
 function growDraw() {
+    growGameStates();
+    if (growState === "end")
+        return;
+
     background("#8a6b8aff");
 
     const d = dist(mouseX, mouseY, growBall.x, growBall.y);//checks distance between mouse and ball
     growOverlap = d < growBall.size / 2;
 
     if (growOverlap) {
-        growBall.fill = growBall.fills.overlap
+        growBall.fill -= 0.5
+        growBall.size += 1
     }
     else {
-        growBall.fill = growBall.fills.noOverlap
+        growBall.fill += 0.5
+        growBall.size -= 1
     }
     growDrawBall();
+    growWinCondition();
     growShowScore();
 }
 
@@ -75,8 +87,24 @@ function growShowScore() {
     textSize(15);
     text("score: " + growScore.toFixed(0), 10, 10);
     pop();
-    if (growOverlap) {
+    if (growOverlap && growBall.size > 0 && growBall.size < 640) {
         growScore += deltaTime / 100;
     }
 
+}
+function growDrawEndscreen() {
+
+    fill(255);
+    textAlign(CENTER);
+    textSize(50);
+    text("GAME OVER", height / 2, width / 2);
+    text("Refresh to restart", height / 2, width / 1.5);
+
+
+}
+
+function growWinCondition() {
+    if (growBall.size >= 640 || growBall.size <= 0) {
+        growState = "end"
+    }
 }
