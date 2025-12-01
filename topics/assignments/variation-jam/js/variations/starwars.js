@@ -62,7 +62,7 @@ function starwarsDraw() {
         return;
 
     }
-    background(22, 25);
+    background(22, 45);
     starwarsDrawShip();
     starwarsMoveShip();
     starwarsDrawWeakspot();
@@ -75,7 +75,9 @@ function starwarsDraw() {
         starwarsUpdateParticle(particle);
         starwarsCheckOverlap(particle);
     }
+    push();
     text("Lives left: " + lives, 10, 20);
+    pop();
 }
 function starwarsDrawParticle(particle) {
 
@@ -88,7 +90,7 @@ function starwarsUpdateParticle(particle) {
     if (random() < 0.2) {
         particle.size = random(0, 3);
     }
-    particle.x -= 1;
+    particle.x -= 2;
     // Wrap if needed
     if (particle.x < 0) {
         particle.x = width;
@@ -123,17 +125,29 @@ function starwarsMousePressed() {
 }
 
 function starwarsDrawShip() {
+
+
     push();
+    //base of ship
     noStroke();
     fill("#737373ff");
     ellipse(ship.x, ship.y, ship.size);
     pop();
-
+    //lighter circle
+    noStroke();
+    fill("#4f4f4fff");
+    ellipse(ship.x + 15, ship.y - 10, ship.size - 60);
+    pop();
+    //darker cirlce
     push();
     noStroke();
-    fill("#737373ff");
-    rect(ship.x, ship.y, ship.width, ship.height);
+    fill("#2e2d2dff");
+    ellipse(ship.x + 15, ship.y - 10, ship.size - 90);
     pop();
+
+
+    ship.x = constrain(ship.x, 0, width);
+    ship.y = constrain(ship.y, 0, height - 40);
 
 }
 function starwarsMoveShip() {
