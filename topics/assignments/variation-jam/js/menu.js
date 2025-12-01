@@ -5,10 +5,11 @@
  */
 
 const menuText = `
-(1) original variation
-(2) starwars variation
-(3) movement variation
-(4) avoid variation
+(1) Original variation
+(2) Starwars variation
+(3) Movement variation
+(4) Avoid variation
+(5) Grow variation
 `
 
 /**
@@ -48,6 +49,10 @@ function menuKeyPressed(event) {
         case 52:
             state = "avoid";
             avoidSetup();
+            break;
+        case 53:
+            state = "grow";
+            growSetup();
             break;
     }
 }

@@ -39,6 +39,9 @@ function draw() {
         case "avoid":
             avoidDraw();
             break;
+        case "grow":
+            growDraw();
+            break;
     }
 }
 
@@ -60,8 +63,11 @@ function mousePressed() {
         case "movement":
             movementMousePressed();
             break;
-        case "movement":
+        case "avoid":
             avoidMousePressed();
+            break;
+        case "grow":
+            growMousePressed();
             break;
     }
 }
@@ -84,8 +90,11 @@ function keyPressed(event) {
         case "movement":
             movementKeyPressed(event);
             break;
-        case "movement":
+        case "avoid":
             avoidKeyPressed(event);
+            break;
+        case "grow":
+            growKeyPressed(event);
             break;
     }
 }
