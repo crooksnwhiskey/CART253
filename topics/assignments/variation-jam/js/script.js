@@ -42,6 +42,9 @@ function draw() {
         case "grow":
             growDraw();
             break;
+        case "bounce":
+            bounceDraw();
+            break;
     }
 }
 
@@ -69,6 +72,9 @@ function mousePressed() {
         case "grow":
             growMousePressed();
             break;
+        case "bounce":
+            bounceMousePressed();
+            break;
     }
 }
 
@@ -95,6 +101,9 @@ function keyPressed(event) {
             break;
         case "grow":
             growKeyPressed(event);
+            break;
+        case "bounce":
+            bounceKeyPressed(event);
             break;
     }
 }

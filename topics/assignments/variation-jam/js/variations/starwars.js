@@ -134,14 +134,15 @@ function starwarsDrawShip() {
     ellipse(ship.x, ship.y, ship.size);
     pop();
     //lighter circle
+    push();
     noStroke();
-    fill("#4f4f4fff");
+    fill(lerpColor(color("#4f4f4fff"), color("#2e2d2dff"), 0.7));
     ellipse(ship.x + 15, ship.y - 10, ship.size - 60);
     pop();
     //darker cirlce
     push();
     noStroke();
-    fill("#2e2d2dff");
+    fill(lerpColor(color("#4f4f4fff"), color("#2e2d2dff"), 0.3));
     ellipse(ship.x + 15, ship.y - 10, ship.size - 90);
     pop();
 

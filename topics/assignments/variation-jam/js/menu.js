@@ -10,6 +10,7 @@ const menuText = `
 (3) Movement variation
 (4) Avoid variation
 (5) Grow variation
+(6) Bounce variation
 `
 
 /**
@@ -53,6 +54,10 @@ function menuKeyPressed(event) {
         case 53:
             state = "grow";
             growSetup();
+            break;
+        case 54:
+            state = "bounce";
+            bounceSetup();
             break;
     }
 }
