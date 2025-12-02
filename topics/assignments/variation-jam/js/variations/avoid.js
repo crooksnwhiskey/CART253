@@ -10,6 +10,8 @@
 let avoidState = "avoidgameOn";
 let avoidBallx;
 let avoidBally;
+let avoidScore = 0;
+/**sets the info for the ball */
 const avoidBall = {
     x: 800,
     y: 800,
@@ -24,12 +26,10 @@ const avoidBall = {
 
 let avoidOverlap = false;
 
-
+/**setup for avoid, creates canvas */
 function avoidSetup() {
     createCanvas(640, 480);
-
 }
-
 /**
  * This will be called every frame when the avoid variation is active
  */
@@ -38,31 +38,29 @@ function avoidDraw() {
 
     if (avoidState === "avoidend") {
         avoidDrawEndscreen();
+        avoidShowScore();
         return;
     }
     //this is what chases the ball by lerp position
     avoidBall.x = lerp(avoidBall.x, mouseX, 0.02);
     avoidBall.y = lerp(avoidBall.y, mouseY, 0.02);
 
-
-    const d = dist(mouseX, mouseY, avoidBall.x, avoidBall.y);//checks distance between mouse and ball
+    //checks distance between mouse and ball
+    const d = dist(mouseX, mouseY, avoidBall.x, avoidBall.y);
     avoidOverlap = d < avoidBall.size / 2;
-
-    if (avoidOverlap) {
-        avoidBall.fill = avoidBall.fills.overlap
-    }
-    else {
-        avoidBall.fill = avoidBall.fills.noOverlap
-    }
-
+    //draws ball
     avoidDrawBall();
 
-
+    //if overlap, game ends
     if (avoidOverlap) {
         avoidState = "avoidend";
 
     }
-
+    //score is a timer
+    if (avoidState === "avoidgameOn") {
+        avoidScore += deltaTime / 1000;
+    }
+    avoidShowScore();
 }
 
 /**
@@ -80,19 +78,27 @@ function avoidKeyPressed(event) {
 function avoidMousePressed() {
 
 }
+/**
+ * draws the ball for thisgame
+ */
 function avoidDrawBall() {
     push();
     fill(avoidBall.fill);
     ellipse(avoidBall.x, avoidBall.y, avoidBall.size);
     pop();
 }
-
+/**
+ * handels the game states
+ */
 function avoidsGameStates() {
-
+    //if the game ends, draws the endscreen
     if (avoidState === "avoidend") {
         avoidDrawEndscreen();
     }
 }
+/**
+ * draws the endscreen
+ */
 function avoidDrawEndscreen() {
     background("rgba(0, 0, 0, 0.73)");
     push();
@@ -108,4 +114,17 @@ function avoidDrawEndscreen() {
     textSize(20)
     text("Refresh to Restart", width / 2, 300);
     pop();
+}
+/**
+ * draws the score
+ */
+function avoidShowScore() {
+
+    push();
+    textAlign(LEFT, TOP);
+    stroke(255);
+    textSize(15);
+    text("score: " + avoidScore.toFixed(2), 10, 10);
+    pop();
+
 }

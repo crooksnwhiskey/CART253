@@ -23,7 +23,9 @@ const originalBall = {
 let originalScore = 0;
 let originalOverlap = false;
 
-
+/**
+ * creates canvas
+ */
 function originalSetup() {
     createCanvas(640, 480);
 
@@ -37,7 +39,7 @@ function originalDraw() {
 
     const d = dist(mouseX, mouseY, originalBall.x, originalBall.y);//checks distance between mouse and ball
     originalOverlap = d < originalBall.size / 2;
-
+    //visual indicator for when mouse is on ball
     if (originalOverlap) {
         originalBall.fill = originalBall.fills.overlap
     }
@@ -63,18 +65,25 @@ function originalKeyPressed(event) {
 function originalMousePressed() {
 
 }
+/**
+ * draws the ball
+ */
 function originalDrawBall() {
     push();
     fill(originalBall.fill);
     ellipse(originalBall.x, originalBall.y, originalBall.size);
     pop();
 }
+/**
+ * draws the score
+ */
 function originalShowScore() {
     push();
     textAlign(LEFT, TOP);
     textSize(15);
     text("score: " + originalScore.toFixed(0), 10, 10);
     pop();
+    //if there is overlap, score goes up
     if (originalOverlap) {
         originalScore += deltaTime / 100;
     }

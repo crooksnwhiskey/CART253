@@ -32,7 +32,9 @@ let lives = 3;
 let starwarsState = "gameOn";
 
 const num = 20;
-
+/**
+ * handles the game states
+ */
 function starwarsGameStates() {
 
     if (starwarsState === "end") {
@@ -40,7 +42,10 @@ function starwarsGameStates() {
     }
 
 }
-
+/**
+ * creates the canvas,
+ * adds the particles
+ */
 function starwarsSetup() {
 
     createCanvas(400, 400);
@@ -54,7 +59,12 @@ function starwarsSetup() {
         particles.push(particle);
     }
 }
-
+/**
+ * draws the ship,
+ * handles gamestate,
+ * calls paeticles,
+ * 
+ */
 function starwarsDraw() {
 
     if (starwarsState === "end") {
@@ -79,6 +89,9 @@ function starwarsDraw() {
     text("Lives left: " + lives, 10, 20);
     pop();
 }
+/**
+ * draws the particles
+ */
 function starwarsDrawParticle(particle) {
 
     stroke("rgba(111, 255, 0, 1)");
@@ -86,8 +99,12 @@ function starwarsDrawParticle(particle) {
 
 
 }
+/**
+ * updates the particles position and size
+ */
 function starwarsUpdateParticle(particle) {
     if (random() < 0.2) {
+        //particles each have unique random size from 0,3
         particle.size = random(0, 3);
     }
     particle.x -= 2;
@@ -107,10 +124,9 @@ function starwarsUpdateParticle(particle) {
     }
 
 }
-
-
-
-
+/**
+ * This will be called whenever a key is pressed while the starwars variation is active 
+*/
 function starwarsKeyPressed(event) {
     if (event.keyCode === 27) {
         state = "menu";
@@ -123,7 +139,9 @@ function starwarsKeyPressed(event) {
 function starwarsMousePressed() {
 
 }
-
+/**
+ * draws the "death star"
+*/
 function starwarsDrawShip() {
 
 
@@ -146,11 +164,14 @@ function starwarsDrawShip() {
     ellipse(ship.x + 15, ship.y - 10, ship.size - 90);
     pop();
 
-
+    //constrains the ship so you cant cheese the game
     ship.x = constrain(ship.x, 0, width);
     ship.y = constrain(ship.y, 0, height - 40);
 
 }
+/**
+ * moves the ship with wasd
+ * */
 function starwarsMoveShip() {
     if (keyIsDown(87)) {
         ship.y -= ship.speed
@@ -165,6 +186,9 @@ function starwarsMoveShip() {
         ship.x += ship.speed
     }
 }
+/**
+ * draws the weakspot vent thingy
+ */
 function starwarsDrawWeakspot() {
     push();
     fill("#4a4a4aff");
@@ -173,7 +197,7 @@ function starwarsDrawWeakspot() {
     pop();
 }
 /**
- * Handles the weakspot overlapping the fly
+ * Handles the particles overlapping the weakspot
 */
 function starwarsCheckOverlap(particle) {
 
@@ -183,19 +207,27 @@ function starwarsCheckOverlap(particle) {
     const d = dist(weakspotX, weakspotY, particle.x, particle.y);
     // Check if it's an overlap
     const damage = (d < weakspot.size / 2 + particle.size / 2);
+    //if it overlaps, you get -1 life
     if (damage) {
         starReset(particle);
         lives = lives - 1
     }
+    //iff lives = 0, the game is over
     if (lives <= 0) {
         starwarsState = "end"
     }
 }
+/**
+ * resets the particles
+*/
 function starReset(particle) {
     particle.x = width
     particle.y = random(height);
 
 }
+/**
+ * draws the endscreen
+*/
 function starwarsDrawEndscreen() {
 
     background("rgba(0, 0, 0, 0.73)");

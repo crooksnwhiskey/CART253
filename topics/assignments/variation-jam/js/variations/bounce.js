@@ -22,7 +22,9 @@ const bounceBall = {
 let bounceScore = 0;
 let bounceOverlap = false;
 
-
+/**
+ * creates canvas for this variation
+ */
 function bounceSetup() {
     createCanvas(640, 480);
 
@@ -36,16 +38,14 @@ function bounceDraw() {
 
     const d = dist(mouseX, mouseY, bounceBall.x, bounceBall.y);//checks distance between mouse and ball
     bounceOverlap = d < bounceBall.size / 2;
-
+    //if it overlaps,it adds acceleration in the opposite direction of the mouse
     if (bounceOverlap) {
         let accelerationX = (bounceBall.x - mouseX) * 0.2;
         let accelerationY = (bounceBall.y - mouseY) * 0.2;
         bounceBall.velocityX += accelerationX;
         bounceBall.velocityY += accelerationY;
     }
-    else {
 
-    }
     bounceDrawBall();
     bounceShowScore();
     bounceBallHit();
@@ -67,6 +67,10 @@ function bounceKeyPressed(event) {
 function bounceMousePressed() {
 
 }
+
+/**
+ * draws the ball for this game
+ */
 function bounceDrawBall() {
     push();
     fill(bounceBall.fill);
@@ -74,13 +78,12 @@ function bounceDrawBall() {
     ellipse(bounceBall.x, bounceBall.y, bounceBall.size);
     pop();
 }
+/**
+ * draws the score for this game, if the ball touches an edge, the score goes up by 1
+ */
 function bounceShowScore() {
-    if (bounceBall.x <= bounceBall.size / 2 || bounceBall.x >= width - bounceBall.size / 2) {
-        bounceScore += 1
-    }
-    else if (bounceBall.y <= bounceBall.size / 2 || bounceBall.y >= height - bounceBall.size / 2) {
-        bounceScore += 1
-    }
+
+    //shows the score
     push();
     textAlign(LEFT, TOP);
     textSize(15);
@@ -88,19 +91,34 @@ function bounceShowScore() {
     pop();
 
 }
+/**
+ * handles what happens when the ball touches an edge
+ * It changes to a random colour and the score goes up by 1
+ * the velocity also decreases
+ */
 function bounceBallHit() {
+    //the score goes up when the ball touches the edges
+    if (bounceBall.x <= bounceBall.size / 2 || bounceBall.x >= width - bounceBall.size / 2) {
+        bounceScore += 1
+    }
+    else if (bounceBall.y <= bounceBall.size / 2 || bounceBall.y >= height - bounceBall.size / 2) {
+        bounceScore += 1
+    }
+    //the velocity goes down gradually to give it the weight effect
     bounceBall.x += bounceBall.velocityX;
     bounceBall.y += bounceBall.velocityY;
     bounceBall.velocityX *= 0.97;
     bounceBall.velocityY *= 0.97;
-
+    //constrains the ball to the canvas
     bounceBall.x = constrain(bounceBall.x, 0 + bounceBall.size / 2, width - bounceBall.size / 2)
     bounceBall.y = constrain(bounceBall.y, 0 + bounceBall.size / 2, height - bounceBall.size / 2)
-
+    //changes the colour randomly when it hits an edge
     if (bounceBall.x <= bounceBall.size / 2 || bounceBall.x >= width - bounceBall.size / 2) {
         bounceBall.velocityX *= -1
+        bounceBall.fill = color(random(0, 255), random(0, 255), random(0, 255));
     }
     if (bounceBall.y <= 0 + bounceBall.size / 2 || bounceBall.y >= height - bounceBall.size / 2) {
         bounceBall.velocityY *= -1
+        bounceBall.fill = color(random(0, 255), random(0, 255), random(0, 255));
     }
 }

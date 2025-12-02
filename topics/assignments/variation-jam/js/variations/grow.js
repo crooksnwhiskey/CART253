@@ -19,7 +19,9 @@ const growBall = {
 
 let growScore = 0;
 let growOverlap = false;
-
+/**
+ * handles the game states for this variation
+ */
 function growGameStates() {
 
     if (growState === "end") {
@@ -28,7 +30,9 @@ function growGameStates() {
     }
 
 }
-
+/**
+ * draws the canvas
+ */
 function growSetup() {
     createCanvas(640, 640);
 
@@ -46,11 +50,12 @@ function growDraw() {
 
     const d = dist(mouseX, mouseY, growBall.x, growBall.y);//checks distance between mouse and ball
     growOverlap = d < growBall.size / 2;
-
+    //if cursor and ball overlap, fill colour and size both go up
     if (growOverlap) {
         growBall.fill -= 0.5
         growBall.size += 1
     }
+    //if they dont overlap, fill colour and size shrink
     else {
         growBall.fill += 0.5
         growBall.size -= 1
@@ -75,23 +80,29 @@ function growKeyPressed(event) {
 function growMousePressed() {
 
 }
+/**
+ * draws this games ball
+ */
 function growDrawBall() {
     push();
     fill(growBall.fill);
     ellipse(growBall.x, growBall.y, growBall.size);
     pop();
 }
+//shows the score
 function growShowScore() {
     push();
     textAlign(LEFT, TOP);
     textSize(15);
-    text("score: " + growScore.toFixed(0), 10, 10);
+    text("score: " + growScore.toFixed(2), 10, 10);
     pop();
-    if (growOverlap && growBall.size > 0 && growBall.size < 640) {
-        growScore += deltaTime / 100;
-    }
+    //score is a timer
+    growScore += deltaTime / 1000;
 
 }
+/**
+ * draws the end screen
+ */
 function growDrawEndscreen() {
 
     fill(255);
@@ -102,7 +113,9 @@ function growDrawEndscreen() {
 
 
 }
-
+/**
+ * determines when the game is over
+ */
 function growWinCondition() {
     if (growBall.size >= 640 || growBall.size <= 0) {
         growState = "end"

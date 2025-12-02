@@ -23,11 +23,12 @@ let movementBall = {
 let movementScore = 0;
 let movementOverlap = false;
 
-
+/**
+ * creates the canvas
+ */
 function movementSetup() {
     createCanvas(640, 480);
-    movementBall.x = width / 2;
-    movementBall.y = height / 2;
+
 
 }
 
@@ -42,7 +43,7 @@ function movementDraw() {
 
     const d = dist(mouseX, mouseY, movementBall.x, movementBall.y);//checks distance between mouse and ball
     movementOverlap = d < movementBall.size / 2;
-
+    //visual cue to see overlaps
     if (movementOverlap) {
         movementBall.fill = movementBall.fills.overlap
     }
@@ -72,6 +73,9 @@ function movementKeyPressed(event) {
 function movementMousePressed() {
 
 }
+/**
+ * draws this games ball
+ */
 function movementDrawBall() {
     push();
     fill(movementBall.fill);
@@ -80,12 +84,16 @@ function movementDrawBall() {
 
 
 }
+/**
+ * shwos the score for this game
+ */
 function movementShowScore() {
     push();
     textAlign(LEFT, TOP);
     textSize(15);
     text("score: " + movementScore.toFixed(0), 10, 10);
     pop();
+    //if it overlaps, the score goes up
     if (movementOverlap) {
         movementScore += deltaTime / 100;
     }
@@ -99,10 +107,10 @@ function movementBallMove() {
     let noiseScale = 0.007;
 
     let nt = noiseScale * frameCount;
-
+    //makes the movement random and smooth with noise
     movementBall.x = width * noise(nt);
     movementBall.y = height * noise(nt + 10000);
-
+    //constrains the ball to canvas
     movementBall.x = constrain(movementBall.x, movementBall.size / 2, width - movementBall.size / 2);
     movementBall.y = constrain(movementBall.y, movementBall.size / 2, height - movementBall.size / 2);
 
